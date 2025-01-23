@@ -48,7 +48,8 @@ public class Lolok {
         }
         scanner.close();
     }
-    private void addTaskToList(String type, String[] argument) {
+
+    private void addTaskToList(String type, String[] argument) throws IncorrectArgumentNumberException {
 
         switch(type){
         case "todo":
@@ -62,7 +63,7 @@ public class Lolok {
             break;
         }
     }
-    private void echo(String message) {
+    private void printMessageBlock(String message) {
         printLine();
         System.out.println(message);
         printLine();
@@ -92,11 +93,18 @@ public class Lolok {
         String message = isDone
                         ? "Nice! I've marked this task as done:"
                         :"OK, I've marked this task as not done yet:";
-        echo(message + "\n" + task.toString());
+        printMessageBlock(message + "\n" + task.toString());
+    }
+
+    private void deleteTask(int index) {
+        Task task = this.list.get(index);
+        this.list.remove(index);
+        String message = "Noted. I've removed this task:\n";
+        String taskAmount = String.format("Now you have %d tasks in the list.", list.size());
+        printMessageBlock(message + task.toString() + "\n" + taskAmount);
     }
     public static void main(String[] args) {
        Lolok lolok = new Lolok();
-
        lolok.greet();
        lolok.getUserInput();
     }
