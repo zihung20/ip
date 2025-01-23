@@ -28,32 +28,52 @@ public class Lolok {
         //https://stackoverflow.com/questions/39514730/how-to-take-input-as-string-with-spaces-in-java-using-scanner
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            String input = scanner.nextLine().toLowerCase();
-            String[] command = input.split(" ");
-            if(command.length >= 2 && (command[0].equals("mark") || command[0].equals("unmark"))) {
-                int index = Integer.parseInt(command[1]);
-                markTask(index - 1, command[0].equals("mark"));
+            //lowercase can add in the future
+            String input = scanner.nextLine();
+            String[] block = input.split(" ");
+            if(block.length >= 2 && (block[0].equals("mark") || block[0].equals("unmark"))) {
+                int index = Integer.parseInt(block[1]);
+                markTask(index - 1, block[0].equals("mark"));
             }else if(input.equals("bye")) {
                 this.exit();
                 break;
             } else if(input.equals("list")){
                 this.printList();
             } else {
-                this.addToList(input);
+                //add to list
+                Command command = new Command(block);
+                addTaskToList(block[0], command.getArgument());
             }
         }
         scanner.close();
     }
+    private void addTaskToList(String type, String[] argument) {
 
+        switch(type){
+        case "todo":
+            addToList(new Todo(argument[0]));
+            break;
+        case "deadline":
+            addToList(new Deadline(argument[0], argument[1]));
+            break;
+        case "event":
+            addToList(new Event(argument[0], argument[1], argument[2]));
+            break;
+        }
+    }
     private void echo(String message) {
         printLine();
         System.out.println(message);
         printLine();
     }
 
-    private void addToList(String message) {
-        this.echo("added: " + message);
-        this.list.add(new Task(message));
+    private void addToList(Task task) {
+        this.list.add(task);
+        printLine();
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task.toString());
+        System.out.printf("Now you have %d tasks in the list.%n", list.size());
+        printLine();
     }
 
     private void printList() {
@@ -68,14 +88,10 @@ public class Lolok {
     private void markTask(int index, boolean isDone) {
         Task task = this.list.get(index);
         task.setDone(isDone);
-        String message = "";
-        String status = "[" + task.getStatusIcon() + "] " + task.getDescription();
-        if(isDone) {
-            message = "Nice! I've marked this task as done:";
-        } else {
-            message = "OK, I've marked this task as not done yet:";
-        }
-        echo(message + "\n" + status);
+        String message = isDone
+                        ? "Nice! I've marked this task as done:"
+                        :"OK, I've marked this task as not done yet:";
+        echo(message + "\n" + task.toString());
     }
     public static void main(String[] args) {
        Lolok lolok = new Lolok();
