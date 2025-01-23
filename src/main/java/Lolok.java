@@ -33,6 +33,7 @@ public class Lolok {
             String[] block = input.split(" ");
             if(block.length >= 2 && (block[0].equals("mark") || block[0].equals("unmark"))) {
                 int index = Integer.parseInt(block[1]);
+
                 markTask(index - 1, block[0].equals("mark"));
             }else if(input.equals("bye")) {
                 this.exit();
@@ -78,7 +79,7 @@ public class Lolok {
 
     private void printList() {
         printLine();
-        System.out.println("Here are the task in your list");
+        System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + "." + list.get(i).toString());
         }
