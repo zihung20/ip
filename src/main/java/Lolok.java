@@ -60,8 +60,7 @@ public class Lolok {
         printLine();
         System.out.println("Here are the task in your list");
         for(int i = 0; i < list.size(); i++) {
-            System.out.print((i + 1) + ".[" + list.get(i).getStatusIcon() + "] ");
-            System.out.println(list.get(i).getDescription());
+            System.out.println((i + 1) + "." + list.get(i).toString());
         }
         printLine();
     }
