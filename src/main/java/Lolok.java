@@ -19,6 +19,7 @@ public class Lolok {
     }
 
     private void exit() {
+        printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
@@ -28,9 +29,11 @@ public class Lolok {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine().toLowerCase();
-
-            if(input.equals("bye")) {
-                printLine();
+            String[] command = input.split(" ");
+            if(command.length >= 2 && (command[0].equals("mark") || command[0].equals("unmark"))) {
+                int index = Integer.parseInt(command[1]);
+                markTask(index - 1, command[0].equals("mark"));
+            }else if(input.equals("bye")) {
                 this.exit();
                 break;
             } else if(input.equals("list")){
@@ -41,6 +44,7 @@ public class Lolok {
         }
         scanner.close();
     }
+
     private void echo(String message) {
         printLine();
         System.out.println(message);
@@ -56,10 +60,23 @@ public class Lolok {
         printLine();
         System.out.println("Here are the task in your list");
         for(int i = 0; i < list.size(); i++) {
-            System.out.print(i + ".[" + list.get(i).getStatusIcon() + "] ");
+            System.out.print((i + 1) + ".[" + list.get(i).getStatusIcon() + "] ");
             System.out.println(list.get(i).getDescription());
         }
         printLine();
+    }
+
+    private void markTask(int index, boolean isDone) {
+        Task task = this.list.get(index);
+        task.setDone(isDone);
+        String message = "";
+        String status = "[" + task.getStatusIcon() + "] " + task.getDescription();
+        if(isDone) {
+            message = "Nice! I've marked this task as done:";
+        } else {
+            message = "OK, I've marked this task as not done yet:";
+        }
+        echo(message + "\n" + status);
     }
     public static void main(String[] args) {
        Lolok lolok = new Lolok();
