@@ -5,16 +5,17 @@ import java.util.Scanner;
 public class Lolok {
     private final String name = "Lolok";
     private final String logo = "";
-    private List<String> list = new ArrayList<>();
+    private List<Task> list = new ArrayList<>();
 
     private void greet() {
         printLine();
         System.out.println("Hello! I'm " + this.name);
         System.out.println("What can I do for you?");
+        printLine();
     }
 
     private static void printLine() {
-        System.out.println("__________________________________");
+        System.out.println("_".repeat(32));
     }
 
     private void exit() {
@@ -27,6 +28,7 @@ public class Lolok {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine().toLowerCase();
+
             if(input.equals("bye")) {
                 printLine();
                 this.exit();
@@ -47,14 +49,15 @@ public class Lolok {
 
     private void addToList(String message) {
         this.echo("added: " + message);
-        this.list.add(message);
+        this.list.add(new Task(message));
     }
 
     private void printList() {
         printLine();
+        System.out.println("Here are the task in your list");
         for(int i = 0; i < list.size(); i++) {
-            System.out.print(i + ". ");
-            System.out.println(list.get(i));
+            System.out.print(i + ".[" + list.get(i).getStatusIcon() + "] ");
+            System.out.println(list.get(i).getDescription());
         }
         printLine();
     }
