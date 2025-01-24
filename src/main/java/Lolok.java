@@ -31,9 +31,8 @@ public class Lolok {
             while (true) {
                 //lowercase can add in the future
                 String input = scanner.nextLine();
-                String[] block = input.split(" ");
-                Command command = new Command(block);
-                switch (block[0]) {
+                Command command = new Command(input.split(" "));
+                switch (input) {
                     case "bye":
                         this.exit();
                         break;
@@ -58,7 +57,7 @@ public class Lolok {
             if(List.of("mark", "unmark", "delete").contains(type)) {
                 String[] arg = command.getArgument(1);
                 if(type.equals("delete")) {
-                    deleteTask(Integer.parseInt(arg[0]));
+                    deleteTask(Integer.parseInt(arg[0]) - 1);
                 } else {
                     markTask(Integer.parseInt(arg[0]) - 1, command.getType().equals("mark"));
                 }
