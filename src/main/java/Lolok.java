@@ -74,7 +74,7 @@ public class Lolok {
                 throw new InvalidCommandException(type);
             }
         } catch (LolokException e) {
-            System.err.println(e);
+            printMessageBlock(e.toString());
         }
 
     }
@@ -113,12 +113,17 @@ public class Lolok {
     }
 
     private void deleteTask(int index) {
-        Task task = this.list.get(index);
-        this.list.remove(index);
-        String message = "Noted. I've removed this task:\n";
-        String taskAmount = String.format("Now you have %d tasks in the list.", list.size());
-        printMessageBlock(message + task.toString() + "\n" + taskAmount);
+        try {
+            Task task = this.list.get(index);
+            this.list.remove(index);
+            String message = "Noted. I've removed this task:\n";
+            String taskAmount = String.format("Now you have %d tasks in the list.", list.size());
+            printMessageBlock(message + task.toString() + "\n" + taskAmount);
+        } catch (IndexOutOfBoundsException e) {
+            printMessageBlock("Oops! Index" + (index+1) + "is invalid or doesn't have any task.");
+        }
     }
+
     public static void main(String[] args) {
        Lolok lolok = new Lolok();
        lolok.greet();
