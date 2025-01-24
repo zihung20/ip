@@ -27,42 +27,59 @@ public class Lolok {
     private void getUserInput() {
         //https://stackoverflow.com/questions/39514730/how-to-take-input-as-string-with-spaces-in-java-using-scanner
         Scanner scanner = new Scanner(System.in);
-        while (true) {
-            //lowercase can add in the future
-            String input = scanner.nextLine();
-            String[] block = input.split(" ");
-            if(block.length >= 2 && (block[0].equals("mark") || block[0].equals("unmark"))) {
-                int index = Integer.parseInt(block[1]);
-
-                markTask(index - 1, block[0].equals("mark"));
-            }else if(input.equals("bye")) {
-                this.exit();
-                break;
-            } else if(input.equals("list")){
-                this.printList();
-            } else {
-                //add to list
+        try {
+            while (true) {
+                //lowercase can add in the future
+                String input = scanner.nextLine();
+                String[] block = input.split(" ");
                 Command command = new Command(block);
-                addTaskToList(block[0], command.getArgument());
+                switch (block[0]) {
+                    case "bye":
+                        this.exit();
+                        break;
+                    case "list":
+                        this.printList();
+                        break;
+                    default:
+                        multipleArgumentCommand(command);
+                }
             }
-        }
-        scanner.close();
-    }
-
-    private void addTaskToList(String type, String[] argument) throws IncorrectArgumentNumberException {
-
-        switch(type){
-        case "todo":
-            addToList(new Todo(argument[0]));
-            break;
-        case "deadline":
-            addToList(new Deadline(argument[0], argument[1]));
-            break;
-        case "event":
-            addToList(new Event(argument[0], argument[1], argument[2]));
-            break;
+        } catch (LolokException e) {
+            System.err.println(e);
+        } finally {
+            //clean up
+            scanner.close();
         }
     }
+    private void multipleArgumentCommand(Command command) throws InvalidCommandException{
+        try {
+            String type = command.getType();
+            //https://www.geeksforgeeks.org/list-contains-method-in-java-with-examples/
+            if(List.of("mark", "unmark", "delete").contains(type)) {
+                String[] arg = command.getArgument(1);
+                if(type.equals("delete")) {
+                    deleteTask(Integer.parseInt(arg[0]));
+                } else {
+                    markTask(Integer.parseInt(arg[0]) - 1, command.getType().equals("mark"));
+                }
+            } else if(type.equals("todo")) {
+                String[] arg = command.getArgument(1);
+                addToList(new Todo(arg[0]));
+            } else if(type.equals("deadline")){
+                String[] arg = command.getArgument(2);
+                addToList(new Deadline(arg[0], arg[1]));
+            } else if (type.equals("event")) {
+                String[] arg = command.getArgument(3);
+                addToList(new Event(arg[0], arg[1], arg[2]));
+            } else {
+                throw new InvalidCommandException(type);
+            }
+        } catch (LolokException e) {
+            System.err.println(e);
+        }
+
+    }
+
     private void printMessageBlock(String message) {
         printLine();
         System.out.println(message);
