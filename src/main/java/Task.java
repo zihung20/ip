@@ -19,6 +19,14 @@ public class Task {
         return (this.isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     *
+     * @return return a format string that follow a standard. e.g x|x|..
+     */
+    public String toFormatString() {
+        return this.getStatusIcon() + "|" + this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() +"] " + this.description;

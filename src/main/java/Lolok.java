@@ -1,8 +1,6 @@
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.nio.file.Paths;
@@ -25,7 +23,7 @@ public class Lolok {
             System.out.println("Reading file from " + path + "...");
             List<String> data = Files.readAllLines(Paths.get(path));
             for(String d : data)   {
-                storeToApplication(d);
+                loadToApplication(d);
             }
         } catch (IOException e) {
             System.out.println("We can't read data from the path");
@@ -33,7 +31,7 @@ public class Lolok {
         printLine();
     }
 
-    private void storeToApplication(String taskString) {
+    private void loadToApplication(String taskString) {
         //[Type]|[Status]|[Name]|[Argument1]|[Argument2]|..
         try {
             String[] stringArray = taskString.split("\\|");
@@ -48,13 +46,13 @@ public class Lolok {
 
             switch (action) {
             case TODO:
-                this.list.add(new Task(stringArray[1]));
+                this.list.add(new Task(stringArray[2]));
                 break;
             case DEADLINE:
-                this.list.add(new Deadline(stringArray[1], stringArray[2]));
+                this.list.add(new Deadline(stringArray[2], stringArray[3]));
                 break;
             case EVENT:
-                this.list.add(new Event(stringArray[1], stringArray[2], stringArray[3]));
+                this.list.add(new Event(stringArray[2], stringArray[3], stringArray[4]));
                 break;
             default:
                 throw new InvalidDataException("Unsupported action: " + action);
@@ -64,26 +62,41 @@ public class Lolok {
         }
     }
 
+    private void saveList(List<Task> tasks) {
+        for(Task t : tasks) {
+            storeToApplication(t);
+        }
+    }
+
+    private void storeToApplication(Task task) {
+        System.out.println(task);
+    }
+
     private static void printLine() {
         System.out.println("_".repeat(32));
     }
 
     private void exit() {
         printLine();
+        saveList(list);
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
 
+
+
     private void getUserInput() {
         //https://stackoverflow.com/questions/39514730/how-to-take-input-as-string-with-spaces-in-java-using-scanner
         Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
         try {
-            while (true) {
+            while (!exit) {
                 //lowercase can add in the future
                 String input = scanner.nextLine();
                 Command command = new Command(input.split(" "));
                 switch (input) {
                     case "bye":
+                        exit = true;
                         this.exit();
                         break;
                     case "list":
