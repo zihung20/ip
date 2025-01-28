@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -8,7 +10,8 @@ import java.nio.file.Paths;
 public class Lolok {
     private final String name = "Lolok";
     private final String logo = "";
-    private List<Task> list = new ArrayList<>();
+    private final List<Task> list = new ArrayList<>();
+    private final String defaultPath = "./data/lolok_data.txt";
 
     private void greet() {
         printLine();
@@ -17,11 +20,11 @@ public class Lolok {
         printLine();
     }
 
-    public void readData(String path) {
+    public void readData() {
         printLine();
         try {
-            System.out.println("Reading file from " + path + "...");
-            List<String> data = Files.readAllLines(Paths.get(path));
+            System.out.println("Reading file from " + this.defaultPath + "...");
+            List<String> data = Files.readAllLines(Paths.get(this.defaultPath));
             for(String d : data)   {
                 loadToApplication(d);
             }
@@ -62,15 +65,18 @@ public class Lolok {
         }
     }
 
-    private void saveList(List<Task> tasks) {
-        for(Task t : tasks) {
-            storeToApplication(t);
+    private void saveList(List<Task> tasks, boolean append) {
+        System.out.println("Saving tasks...");
+        try (FileWriter fw = new FileWriter(defaultPath, append)) {
+            for (Task t : tasks) {
+                fw.write(t.toFormatString() + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            System.out.println("Something wrong when saving the file" + e.getMessage());
         }
     }
 
-    private void storeToApplication(Task task) {
-        System.out.println(task);
-    }
+
 
     private static void printLine() {
         System.out.println("_".repeat(32));
@@ -78,7 +84,7 @@ public class Lolok {
 
     private void exit() {
         printLine();
-        saveList(list);
+        saveList(list, true);
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
@@ -189,9 +195,8 @@ public class Lolok {
 
     public static void main(String[] args) {
        Lolok lolok = new Lolok();
-       String defaultPath = "./data/lolok_data.txt";
        lolok.greet();
-       lolok.readData(defaultPath);
+       lolok.readData();
        lolok.getUserInput();
     }
 }
