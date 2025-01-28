@@ -1,6 +1,11 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Paths;
 
 public class Lolok {
     private final String name = "Lolok";
@@ -12,6 +17,51 @@ public class Lolok {
         System.out.println("Hello! I'm " + this.name);
         System.out.println("What can I do for you?");
         printLine();
+    }
+
+    public void readData(String path) {
+        printLine();
+        try {
+            System.out.println("Reading file from " + path + "...");
+            List<String> data = Files.readAllLines(Paths.get(path));
+            for(String d : data)   {
+                storeToApplication(d);
+            }
+        } catch (IOException e) {
+            System.out.println("We can't read data from the path");
+        }
+        printLine();
+    }
+
+    private void storeToApplication(String taskString) {
+        //[Type]|[Status]|[Name]|[Argument1]|[Argument2]|..
+        try {
+            String[] stringArray = taskString.split("\\|");
+            if (stringArray[0].equals("C")) {
+                //comment, do nothing
+                return;
+            }
+            Action action = Action.parseData(stringArray[0]);
+            if (action.getArgumentCount() + 2 != stringArray.length) {
+                throw new InvalidDataException("Invalid arguments for action: " + taskString);
+            }
+
+            switch (action) {
+            case TODO:
+                this.list.add(new Task(stringArray[1]));
+                break;
+            case DEADLINE:
+                this.list.add(new Deadline(stringArray[1], stringArray[2]));
+                break;
+            case EVENT:
+                this.list.add(new Event(stringArray[1], stringArray[2], stringArray[3]));
+                break;
+            default:
+                throw new InvalidDataException("Unsupported action: " + action);
+            }
+        } catch (InvalidDataException e) {
+            System.out.println("Some errors occur while reading data. "+e.getMessage());
+        }
     }
 
     private static void printLine() {
@@ -126,7 +176,9 @@ public class Lolok {
 
     public static void main(String[] args) {
        Lolok lolok = new Lolok();
+       String defaultPath = "./data/lolok_data.txt";
        lolok.greet();
+       lolok.readData(defaultPath);
        lolok.getUserInput();
     }
 }

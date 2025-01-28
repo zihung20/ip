@@ -4,7 +4,7 @@ public enum Action {
     UNMARK(1),
     TODO(1),
     DEADLINE(2),
-    EVENT(2),
+    EVENT(3),
     DELETE(1);
 
     private final int argumentCount;
@@ -14,5 +14,14 @@ public enum Action {
 
     public int getArgumentCount() {
         return this.argumentCount;
+    }
+
+    public static Action parseData(String type) throws InvalidDataException{
+        return switch (type) {
+            case "T" -> Action.TODO;
+            case "D" -> Action.DEADLINE;
+            case "E" -> Action.EVENT;
+            default -> throw new InvalidDataException("Unknown Action: " + type);
+        };
     }
 }
