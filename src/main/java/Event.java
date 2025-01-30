@@ -7,14 +7,15 @@ public class Event extends Task{
 
     public Event(String description, String from, String to) {
         super(description);
-        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm");
+        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
         this.from = LocalDateTime.parse(from, parseFormat);
         this.to = LocalDateTime.parse(to, parseFormat);
     }
 
     @Override
     public String toFormatString() {
-        return "E|" + super.toFormatString() + "|" + this.from + "|" + this.to;
+        return "E|" + super.toFormatString() + "|" + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"))
+                + "|" + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"));
     }
 
     @Override
