@@ -29,7 +29,7 @@ public class TaskList {
 
             switch (action) {
             case TODO:
-                this.list.add(new Task(stringArray[2]));
+                this.list.add(new Todo(stringArray[2]));
                 break;
             case DEADLINE:
                 this.list.add(new Deadline(stringArray[2], stringArray[3]));
