@@ -51,20 +51,20 @@ public class TaskList {
 
     public void addToList(Task task) {
         this.list.add(task);
-        //printLine();
+        Ui.printLine();
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
         System.out.printf("Now you have %d tasks in the list.%n", list.size());
-        //printLine();
+        Ui.printLine();
     }
 
     public void printList() {
-        //printLine();
+        Ui.printLine();
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + "." + list.get(i).toString());
         }
-        //printLine();
+        Ui.printLine();
     }
 
     public void deleteTask(int index) {
@@ -73,9 +73,9 @@ public class TaskList {
             this.list.remove(index);
             String message = "Noted. I've removed this task:\n";
             String taskAmount = String.format("Now you have %d tasks in the list.", list.size());
-            //printMessageBlock(message + task.toString() + "\n" + taskAmount);
+            Ui.printMessageBlock(message + task.toString() + "\n" + taskAmount);
         } catch (IndexOutOfBoundsException e) {
-            //printMessageBlock("Oops! Index" + (index+1) + "is invalid or doesn't have any task.");
+            Ui.printMessageBlock("Oops! Index" + (index+1) + "is invalid or doesn't have any task.");
         }
     }
 
@@ -85,6 +85,6 @@ public class TaskList {
         String message = isDone
                 ? "Nice! I've marked this task as done:"
                 :"OK, I've marked this task as not done yet:";
-        //printMessageBlock(message + "\n" + task.toString());
+        Ui.printMessageBlock(message + "\n" + task);
     }
 }

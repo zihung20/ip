@@ -1,16 +1,8 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.nio.file.Paths;
 
 public class Lolok {
     private final String name = "Lolok";
-    private final String logo = "";
-
     private Storage storage;
     private TaskList taskList;
 
@@ -18,11 +10,16 @@ public class Lolok {
         readData(path);
     }
 
+    public void run() {
+        this.greet();
+        this.getUserInput();
+    }
+
     private void greet() {
-        printLine();
+        Ui.printLine();
         System.out.println("Hello! I'm " + this.name);
         System.out.println("What can I do for you?");
-        printLine();
+        Ui.printLine();
     }
 
     public void readData(String path) {
@@ -30,44 +27,37 @@ public class Lolok {
         this.taskList = new TaskList(storage.loadData());
     }
 
-    private static void printLine() {
-        System.out.println("_".repeat(32));
-    }
-
     private void exit() {
-        printLine();
+        Ui.printLine();
         this.storage.saveData(taskList.getList(), false);
         System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+        Ui.printLine();
     }
 
     private void getUserInput() {
         //https://stackoverflow.com/questions/39514730/how-to-take-input-as-string-with-spaces-in-java-using-scanner
-        Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
-        try {
+        try (Scanner scanner = new Scanner(System.in)) {
+            boolean exit = false;
             while (!exit) {
                 //lowercase can add in the future
                 String input = scanner.nextLine();
                 Command command = new Command(input.split(" "));
                 switch (input) {
-                    case "bye":
-                        exit = true;
-                        this.exit();
-                        break;
-                    case "list":
-                        taskList.printList();
-                        break;
-                    default:
-                        multipleArgumentCommand(command);
+                case "bye":
+                    exit = true;
+                    this.exit();
+                    break;
+                case "list":
+                    taskList.printList();
+                    break;
+                default:
+                    multipleArgumentCommand(command);
                 }
             }
         } catch (LolokException e) {
             System.err.println(e);
-        } finally {
-            //clean up
-            scanner.close();
         }
+        //clean up
     }
     private void multipleArgumentCommand(Command command) throws InvalidCommandException{
         try {
@@ -93,20 +83,10 @@ public class Lolok {
                 throw new InvalidCommandException(type);
             }
         } catch (LolokException e) {
-            printMessageBlock(e.toString());
+            Ui.printMessageBlock(e.toString());
         }
-
     }
 
-    private void printMessageBlock(String message) {
-        printLine();
-        System.out.println(message);
-        printLine();
-    }
-    public void run() {
-        this.greet();
-        this.getUserInput();
-    }
     public static void main(String[] args) {
         String defaultPath = "./data/lolok_data.txt";
         Lolok lolok = new Lolok(defaultPath);
