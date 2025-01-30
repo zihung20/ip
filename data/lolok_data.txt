@@ -1,4 +1,4 @@
 C|format: [Type]|[Status]|[Name]|[Argument1]|[Argument2]|...
-E| |project meeting|Mon 2pm|4pm
-E| |project meeting|Mon 4pm|6pm
-E| |只因你太美|Mon 6pm|8pm
+E| |project meeting|31 December 2025, 15:30|31 December 2025, 17:30
+E| |project meeting|31 December 2025, 15:30|31 December 2025, 17:30
+D| |只因你太美|31 December 2025, 15:30
