@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -61,6 +62,8 @@ public class Lolok {
             }
         } catch (InvalidDataException e) {
             System.out.println("Some errors occur while reading data. "+e.getMessage());
+        } catch (DateTimeParseException e) {
+            System.out.println("The date format of the data cannot be parsed. " + e.getMessage());
         }
     }
 
