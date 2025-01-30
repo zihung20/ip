@@ -30,6 +30,11 @@ public class Task {
         return this.getStatusIcon() + "|" + this.description;
     }
 
+    /**
+     * Returns a human-readable string representation of the task, e.g., "[X] example task".
+     *
+     * @return a human-readable string representation of the task
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() +"] " + this.description;
