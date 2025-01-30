@@ -2,6 +2,7 @@ package lolok;
 
 public class InvalidCommandException extends LolokException {
     private String type;
+
     public InvalidCommandException(String message) {
         super(message);
         this.type = message;

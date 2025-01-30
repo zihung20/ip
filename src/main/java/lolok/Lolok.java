@@ -41,7 +41,7 @@ public class Lolok {
                 // should already handle exception in duke.Command
                 System.out.println(e.toString());
             } finally {
-                if(!exit) {
+                if (!exit) {
                     Ui.printLine();
                 }
             }

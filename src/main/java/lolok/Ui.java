@@ -6,7 +6,7 @@ public class Ui {
     private final Scanner scanner;
 
     public Ui() {
-        this.scanner =  new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     public static void printLine() {

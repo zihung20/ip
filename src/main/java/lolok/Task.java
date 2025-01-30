@@ -22,7 +22,6 @@ public class Task {
     }
 
     /**
-     *
      * @return return a format string that follow a standard. e.g x|x|..
      */
     public String toFormatString() {
@@ -31,6 +30,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() +"] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

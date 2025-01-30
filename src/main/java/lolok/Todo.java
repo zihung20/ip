@@ -2,8 +2,9 @@ package lolok;
 
 import java.util.Objects;
 
-public class Todo extends Task{
+public class Todo extends Task {
     String description;
+
     public Todo(String description) {
         super(description);
         this.description = description;
