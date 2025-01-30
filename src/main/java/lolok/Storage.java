@@ -9,10 +9,20 @@ import java.util.List;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Creates a Storage instance that handles loading and saving data to the specified file path.
+     *
+     * @param filePath the file path for storing and retrieving data
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the data and returns a list of strings, each representing a task in a specific format.
+     *
+     * @return a list of strings, where each string represents a task
+     */
     public List<String> loadData() {
         try {
             System.out.println("Reading file from " + this.filePath + "...");
@@ -23,6 +33,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the data to the file path defined in this instance.
+     *
+     * @param tasks the list of tasks to be saved to the file
+     * @param append true if the data should be appended to the existing file
+     */
     public void saveData(List<Task> tasks, boolean append) {
         System.out.println("Saving tasks...");
         //FileWriter create file when it does not exist
