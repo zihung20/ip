@@ -51,20 +51,16 @@ public class TaskList {
 
     public void addToList(Task task) {
         this.list.add(task);
-        Ui.printLine();
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
         System.out.printf("Now you have %d tasks in the list.%n", list.size());
-        Ui.printLine();
     }
 
     public void printList() {
-        Ui.printLine();
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + "." + list.get(i).toString());
         }
-        Ui.printLine();
     }
 
     public void deleteTask(int index) {
