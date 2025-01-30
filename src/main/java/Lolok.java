@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,7 +28,7 @@ public class Lolok {
                 loadToApplication(d);
             }
         } catch (IOException e) {
-            System.out.println("We can't read data from the path");
+            System.out.println("We can't read data from the path: " + e.getMessage());
         }
         printLine();
     }
@@ -67,11 +66,13 @@ public class Lolok {
 
     private void saveList(List<Task> tasks, boolean append) {
         System.out.println("Saving tasks...");
+        //FileWriter create file when it does not exist
         try (FileWriter fw = new FileWriter(defaultPath, append)) {
             for (Task t : tasks) {
                 fw.write(t.toFormatString() + System.lineSeparator());
             }
         } catch (IOException e) {
+
             System.out.println("Something wrong when saving the file" + e.getMessage());
         }
     }
@@ -84,7 +85,7 @@ public class Lolok {
 
     private void exit() {
         printLine();
-        saveList(list, true);
+        saveList(list, false);
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
