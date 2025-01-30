@@ -1,4 +1,4 @@
-package duke;
+package lolok;
 
 public class Lolok {
     private final String name = "duke.Lolok";

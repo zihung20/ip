@@ -1,4 +1,4 @@
-package duke;
+package lolok;
 
 public class Task {
     private String description;

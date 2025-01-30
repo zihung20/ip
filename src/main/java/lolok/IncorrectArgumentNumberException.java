@@ -1,4 +1,4 @@
-package duke;
+package lolok;
 
 public class IncorrectArgumentNumberException extends RuntimeException {
   public IncorrectArgumentNumberException(String message) {

@@ -1,4 +1,4 @@
-package duke;
+package lolok;
 
 public enum Action {
     LIST(0),

@@ -1,4 +1,4 @@
-package duke;
+package lolok;
 
 import java.util.Scanner;
 

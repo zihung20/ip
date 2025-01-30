@@ -1,4 +1,4 @@
-package duke;
+package lolok;
 
 public class InvalidCommandException extends LolokException {
     private String type;

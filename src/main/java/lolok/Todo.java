@@ -1,4 +1,4 @@
-package duke;
+package lolok;
 
 public class Todo extends Task{
 
