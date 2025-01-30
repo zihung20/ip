@@ -2,6 +2,7 @@ package lolok;
 
 public class LolokException extends RuntimeException {
     private final String message;
+
     public LolokException(String message) {
         super(message);
         this.message = message;

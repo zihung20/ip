@@ -3,7 +3,7 @@ package lolok;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
@@ -31,6 +31,6 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString()
                 + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"))
-                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"))  +  ")";
+                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 }

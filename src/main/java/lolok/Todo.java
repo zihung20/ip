@@ -2,6 +2,7 @@ package lolok;
 
 import java.util.Objects;
 
+
 public class Todo extends Task{
     private final String description;
 

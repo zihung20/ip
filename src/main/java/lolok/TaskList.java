@@ -14,7 +14,7 @@ public class TaskList {
      */
     public TaskList(List<String> stringList) {
         this.list = new ArrayList<>();
-        for(String s: stringList) {
+        for (String s : stringList) {
             loadToApplication(s);
         }
     }
@@ -46,7 +46,7 @@ public class TaskList {
                 throw new InvalidDataException("Unsupported action: " + action);
             }
         } catch (InvalidDataException e) {
-            System.out.println("Some errors occur while reading data. "+e.getMessage());
+            System.out.println("Some errors occur while reading data. " + e.getMessage());
         } catch (DateTimeParseException e) {
             System.out.println("The date format of the data cannot be parsed. " + e.getMessage());
         }
@@ -69,7 +69,7 @@ public class TaskList {
      */
     public void printList() {
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + "." + list.get(i).toString());
         }
     }
@@ -88,7 +88,7 @@ public class TaskList {
             String taskAmount = String.format("Now you have %d tasks in the list.", list.size());
             Ui.printMessageBlock(message + task.toString() + "\n" + taskAmount);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printMessageBlock("Oops! Index" + (index+1) + "is invalid or doesn't have any task.");
+            Ui.printMessageBlock("Oops! Index" + (index + 1) + "is invalid or doesn't have any task.");
         }
     }
 
@@ -104,7 +104,7 @@ public class TaskList {
         task.setDone(isDone);
         String message = isDone
                 ? "Nice! I've marked this task as done:"
-                :"OK, I've marked this task as not done yet:";
+                : "OK, I've marked this task as not done yet:";
         Ui.printMessageBlock(message + "\n" + task);
     }
 

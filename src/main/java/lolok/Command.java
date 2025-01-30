@@ -21,21 +21,21 @@ public class Command {
     private String[] getArgument (int count) throws IncorrectArgumentNumberException{
         ArrayList<String> ans = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
-        for(int i = 1; i < blocks.length; i++) {
-            if(blocks[i].startsWith("/")) {
+        for (int i = 1; i < blocks.length; i++) {
+            if (blocks[i].startsWith("/")) {
                 ans.add(builder.toString());
                 builder = new StringBuilder();
             } else {
-                if(!builder.isEmpty()) {
+                if (!builder.isEmpty()) {
                     builder.append(" ");
                 }
                 builder.append(blocks[i]);
             }
         }
-        if(!builder.isEmpty()) {
+        if (!builder.isEmpty()) {
             ans.add(builder.toString());
         }
-        if(ans.size() != count) {
+        if (ans.size() != count) {
             throw new IncorrectArgumentNumberException("The number of arguments for "
                     + type + " is not as expected!");
         }
@@ -66,21 +66,22 @@ public class Command {
         }
     }
 
-    private void multipleArgumentCommand(TaskList taskList){
+    private void multipleArgumentCommand(TaskList taskList) {
         try {
             String type = this.getType();
             //https://www.geeksforgeeks.org/list-contains-method-in-java-with-examples/
-            if(List.of("mark", "unmark", "delete").contains(type)) {
+            if (List.of("mark", "unmark", "delete").contains(type)) {
                 String[] arg = this.getArgument(1);
                 if(type.equals("delete")) {
                     taskList.deleteTask(Integer.parseInt(arg[0]));
+
                 } else {
                     taskList.markTask(Integer.parseInt(arg[0]), this.getType().equals("mark"));
                 }
-            } else if(type.equals("todo")) {
+            } else if (type.equals("todo")) {
                 String[] arg = this.getArgument(1);
                 taskList.addToList(new Todo(arg[0]));
-            } else if(type.equals("deadline")){
+            } else if (type.equals("deadline")) {
                 String[] arg = this.getArgument(2);
                 taskList.addToList(new Deadline(arg[0], arg[1]));
             } else if (type.equals("event")) {
