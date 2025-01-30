@@ -73,9 +73,9 @@ public class Command {
             if(List.of("mark", "unmark", "delete").contains(type)) {
                 String[] arg = this.getArgument(1);
                 if(type.equals("delete")) {
-                    taskList.deleteTask(Integer.parseInt(arg[0]) - 1);
+                    taskList.deleteTask(Integer.parseInt(arg[0]));
                 } else {
-                    taskList.markTask(Integer.parseInt(arg[0]) - 1, this.getType().equals("mark"));
+                    taskList.markTask(Integer.parseInt(arg[0]), this.getType().equals("mark"));
                 }
             } else if(type.equals("todo")) {
                 String[] arg = this.getArgument(1);
@@ -97,9 +97,9 @@ public class Command {
     }
 
     /**
-     * Return true if this command is an exit command
+     * Returns true if this command is an exit command.
      *
-     * @return boolean
+     * @return true if the command is an exit command, otherwise false
      */
     public boolean isExit() {
         return this.isExit;

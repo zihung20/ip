@@ -3,7 +3,13 @@ package lolok;
 import java.util.Objects;
 
 public class Todo extends Task{
-    String description;
+    private final String description;
+
+    /**
+     * Constructs a Todo instance, which is a subclass of Task
+     *
+     * @param description the description of the todo task
+     */
     public Todo(String description) {
         super(description);
         this.description = description;
