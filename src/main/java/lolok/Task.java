@@ -22,13 +22,19 @@ public class Task {
     }
 
     /**
+     * Returns a formatted string that follows a standard format, e.g., "x|x|...".
      *
-     * @return return a format string that follow a standard. e.g x|x|..
+     * @return a formatted string for storing data
      */
     public String toFormatString() {
         return this.getStatusIcon() + "|" + this.description;
     }
 
+    /**
+     * Returns a human-readable string representation of the task, e.g., "[X] example task".
+     *
+     * @return a human-readable string representation of the task
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() +"] " + this.description;

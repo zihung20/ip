@@ -7,6 +7,11 @@ public class Lolok {
     private Command command;
     private Ui ui;
 
+    /**
+     * Creates an instance of the Lolok chatbot that loads and stores data using the given file path.
+     *
+     * @param path the file path where data is stored; the file must exist
+     */
     public Lolok(String path) {
         readData(path);
         this.ui = new Ui();
@@ -17,7 +22,12 @@ public class Lolok {
         this.getUserInput();
     }
 
-    public void readData(String path) {
+    /**
+     * Reads data from the specified file.
+     *
+     * @param path the file path to read data from
+     */
+    private void readData(String path) {
         this.storage = new Storage(path);
         this.taskList = new TaskList(storage.loadData());
     }

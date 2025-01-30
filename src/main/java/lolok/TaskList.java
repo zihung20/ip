@@ -7,6 +7,11 @@ import java.util.List;
 public class TaskList {
     private final List<Task> list;
 
+    /**
+     * Creates an instance of a list of tasks that can perform adding, printing, marking, and deleting.
+     *
+     * @param stringList a list of formatted strings to convert to task instances
+     */
     public TaskList(List<String> stringList) {
         this.list = new ArrayList<>();
         for(String s: stringList) {
@@ -47,10 +52,11 @@ public class TaskList {
         }
     }
 
-    public List<Task> getList() {
-        return this.list;
-    }
-
+    /**
+     * Adds the task instance to the list.
+     *
+     * @param task the task to be added to the list
+     */
     public void addToList(Task task) {
         this.list.add(task);
         System.out.println("Got it. I've added this task:");
@@ -58,6 +64,9 @@ public class TaskList {
         System.out.printf("Now you have %d tasks in the list.%n", list.size());
     }
 
+    /**
+     * Prints the tasks in the list.
+     */
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < list.size(); i++) {
@@ -65,7 +74,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the task from the list, with the index starting from 1.
+     *
+     * @param index the index of the task to be deleted
+     */
     public void deleteTask(int index) {
+        index = index - 1;
         try {
             Task task = this.list.get(index);
             this.list.remove(index);
@@ -77,12 +92,23 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task in the list as done or undone, starting from index 1.
+     *
+     * @param index the index of the task to be marked
+     * @param isDone true to mark the task as done, false to mark it as undone
+     */
     public void markTask(int index, boolean isDone) {
+        index--;
         Task task = this.list.get(index);
         task.setDone(isDone);
         String message = isDone
                 ? "Nice! I've marked this task as done:"
                 :"OK, I've marked this task as not done yet:";
         Ui.printMessageBlock(message + "\n" + task);
+    }
+
+    public List<Task> getList() {
+        return this.list;
     }
 }

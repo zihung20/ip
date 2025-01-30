@@ -8,12 +8,17 @@ public class Command {
     private String type;
     private boolean isExit = false;
 
+    /**
+     * Constructs a new instance of a command that processes the given arguments.
+     *
+     * @param block an array of strings, where each index represents an argument
+     */
     public Command(String[] block) {
         this.blocks = block;
         this.type = block[0];
     }
 
-    public String[] getArgument (int count) throws IncorrectArgumentNumberException{
+    private String[] getArgument (int count) throws IncorrectArgumentNumberException{
         ArrayList<String> ans = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         for(int i = 1; i < blocks.length; i++) {
@@ -37,10 +42,17 @@ public class Command {
         return ans.toArray(new String[]{});
     }
 
-    public String getType() {
+    private String getType() {
         return this.type;
     }
 
+    /**
+     * Executes the command accordingly, using the environment passed as parameters.
+     *
+     * @param taskList the TaskList instance to process the command
+     * @param ui the UI instance to handle user interactions
+     * @param storage the Storage instance to manage data persistence
+     */
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) {
         switch (blocks[0]) {
         case "bye":
@@ -61,9 +73,9 @@ public class Command {
             if(List.of("mark", "unmark", "delete").contains(type)) {
                 String[] arg = this.getArgument(1);
                 if(type.equals("delete")) {
-                    taskList.deleteTask(Integer.parseInt(arg[0]) - 1);
+                    taskList.deleteTask(Integer.parseInt(arg[0]));
                 } else {
-                    taskList.markTask(Integer.parseInt(arg[0]) - 1, this.getType().equals("mark"));
+                    taskList.markTask(Integer.parseInt(arg[0]), this.getType().equals("mark"));
                 }
             } else if(type.equals("todo")) {
                 String[] arg = this.getArgument(1);
@@ -84,6 +96,11 @@ public class Command {
         }
     }
 
+    /**
+     * Returns true if this command is an exit command.
+     *
+     * @return true if the command is an exit command, otherwise false
+     */
     public boolean isExit() {
         return this.isExit;
     }
