@@ -98,7 +98,7 @@ public class Command {
 
     /**
      * Return true if this command is an exit command
-     * 
+     *
      * @return boolean
      */
     public boolean isExit() {

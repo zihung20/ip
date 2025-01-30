@@ -22,8 +22,9 @@ public class Task {
     }
 
     /**
+     * Returns a formatted string that follows a standard format, e.g., "x|x|...".
      *
-     * @return return a format string that follow a standard. e.g x|x|..
+     * @return a formatted string for storing data
      */
     public String toFormatString() {
         return this.getStatusIcon() + "|" + this.description;
