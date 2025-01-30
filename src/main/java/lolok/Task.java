@@ -8,9 +8,8 @@ public class Task {
         this.description = description;
     }
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
+    public boolean matchKeyword(String keyword) {
+        return this.description.contains(keyword);
     }
 
     public void setDone(boolean isDone) {
