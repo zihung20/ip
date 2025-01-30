@@ -111,4 +111,12 @@ public class TaskList {
     public List<Task> getList() {
         return this.list;
     }
+
+    public void searchTask(String keyword) {
+        List<Task> ans = list.stream().filter(task -> task.matchKeyword(keyword)).toList();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < ans.size(); i++) {
+            System.out.println((i + 1) + "." + ans.get(i).toString());
+        }
+    }
 }

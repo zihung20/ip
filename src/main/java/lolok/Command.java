@@ -1,6 +1,7 @@
 package lolok;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Command {
@@ -87,6 +88,9 @@ public class Command {
             } else if (type.equals("event")) {
                 String[] arg = this.getArgument(3);
                 taskList.addToList(new Event(arg[0], arg[1], arg[2]));
+            } else if (type.equals("find")) {
+                String[] arg = this.getArgument(1);
+                taskList.searchTask(arg[0]);
             } else {
                 throw new InvalidCommandException(type);
             }
