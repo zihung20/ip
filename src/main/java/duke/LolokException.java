@@ -1,3 +1,5 @@
+package duke;
+
 public class LolokException extends RuntimeException {
     private final String message;
     public LolokException(String message) {
@@ -7,6 +9,6 @@ public class LolokException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "Lolok special Exception: " + this.message;
+        return "duke.Lolok special Exception: " + this.message;
     }
 }

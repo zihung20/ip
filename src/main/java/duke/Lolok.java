@@ -1,6 +1,7 @@
+package duke;
 
 public class Lolok {
-    private final String name = "Lolok";
+    private final String name = "duke.Lolok";
     private Storage storage;
     private TaskList taskList;
     private Command command;
@@ -37,7 +38,7 @@ public class Lolok {
                 command.executeCommand(taskList, ui, storage);
                 exit = command.isExit();
             } catch (LolokException e) {
-                // should already handle exception in Command
+                // should already handle exception in duke.Command
                 System.out.println(e.toString());
             } finally {
                 if(!exit) {

@@ -1,3 +1,5 @@
+package duke;
+
 public enum Action {
     LIST(0),
     MARK(1),
@@ -21,7 +23,7 @@ public enum Action {
             case "T" -> Action.TODO;
             case "D" -> Action.DEADLINE;
             case "E" -> Action.EVENT;
-            default -> throw new InvalidDataException("Unknown Action: " + type);
+            default -> throw new InvalidDataException("Unknown duke.Action: " + type);
         };
     }
 }

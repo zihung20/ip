@@ -1,3 +1,5 @@
+package duke;
+
 public class InvalidCommandException extends LolokException {
     private String type;
     public InvalidCommandException(String message) {
@@ -7,6 +9,6 @@ public class InvalidCommandException extends LolokException {
 
     @Override
     public String toString() {
-        return "Invalid Command. Don't know what '" + this.type + "' means";
+        return "Invalid duke.Command. Don't know what '" + this.type + "' means";
     }
 }
