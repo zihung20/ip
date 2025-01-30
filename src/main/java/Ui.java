@@ -1,4 +1,3 @@
-import javax.naming.directory.InvalidAttributeIdentifierException;
 import java.util.Scanner;
 
 public class Ui {

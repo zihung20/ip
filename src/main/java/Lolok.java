@@ -1,5 +1,3 @@
-import java.util.List;
-import java.util.Scanner;
 
 public class Lolok {
     private final String name = "Lolok";
