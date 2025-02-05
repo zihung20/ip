@@ -1,7 +1,10 @@
 package lolok;
 
+/**
+ *  Represents a task with common properties and behaviors
+ */
 public class Task {
-    private String description;
+    private final String description;
     private boolean isDone = false;
 
     public Task(String description) {
