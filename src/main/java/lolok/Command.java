@@ -1,7 +1,10 @@
 package lolok;
 
+import lolok.exception.IncorrectArgumentNumberException;
+import lolok.exception.InvalidCommandException;
 import lolok.task.Deadline;
 import lolok.task.Event;
+import lolok.task.TaskList;
 import lolok.task.Todo;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ public class Command {
         this.type = block[0];
     }
 
-    private String[] getArgument (int count) throws IncorrectArgumentNumberException{
+    private String[] getArgument (int count) throws IncorrectArgumentNumberException {
         ArrayList<String> ans = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         for (int i = 1; i < blocks.length; i++) {

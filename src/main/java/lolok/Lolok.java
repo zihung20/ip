@@ -1,5 +1,8 @@
 package lolok;
 
+import lolok.exception.LolokException;
+import lolok.task.TaskList;
+
 public class Lolok {
     private final String name = "duke.Lolok";
     private Storage storage;

@@ -1,4 +1,4 @@
-package lolok;
+package lolok.exception;
 
 public class IncorrectArgumentNumberException extends RuntimeException {
     public IncorrectArgumentNumberException(String message) {

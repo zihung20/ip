@@ -1,4 +1,4 @@
-package lolok;
+package lolok.exception;
 
 public class InvalidCommandException extends LolokException {
     private String type;
