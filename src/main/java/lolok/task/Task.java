@@ -3,7 +3,7 @@ package lolok.task;
 /**
  *  Represents a task with common properties and behaviors
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone = false;
 
