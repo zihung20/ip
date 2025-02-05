@@ -4,7 +4,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import lolok.Action;
+import lolok.command.Action;
 import lolok.Ui;
 import lolok.exception.InvalidDataException;
 

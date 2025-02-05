@@ -1,13 +1,16 @@
 package lolok;
 
-import lolok.task.Task;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import lolok.task.Task;
+
+/**
+ * Represents a storage that can store or load data from a file path.
+ */
 public class Storage {
     private final String filePath;
 

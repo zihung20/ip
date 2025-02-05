@@ -1,4 +1,4 @@
-package lolok;
+package lolok.command;
 
 import lolok.exception.InvalidDataException;
 
