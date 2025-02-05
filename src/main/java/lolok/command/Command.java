@@ -1,9 +1,21 @@
-package lolok;
+package lolok.command;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import lolok.Storage;
+import lolok.Ui;
+import lolok.exception.IncorrectArgumentNumberException;
+import lolok.exception.InvalidCommandException;
+import lolok.task.Deadline;
+import lolok.task.Event;
+import lolok.task.TaskList;
+import lolok.task.Todo;
+
+
+/**
+ * Represents a command that executes and processes the given command.
+ */
 public class Command {
     private String[] blocks;
     private String type;
@@ -19,7 +31,7 @@ public class Command {
         this.type = block[0];
     }
 
-    private String[] getArgument (int count) throws IncorrectArgumentNumberException{
+    private String[] getArgument(int count) throws IncorrectArgumentNumberException {
         ArrayList<String> ans = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         for (int i = 1; i < blocks.length; i++) {
@@ -73,7 +85,7 @@ public class Command {
             //https://www.geeksforgeeks.org/list-contains-method-in-java-with-examples/
             if (List.of("mark", "unmark", "delete").contains(type)) {
                 String[] arg = this.getArgument(1);
-                if(type.equals("delete")) {
+                if (type.equals("delete")) {
                     taskList.deleteTask(Integer.parseInt(arg[0]));
 
                 } else {

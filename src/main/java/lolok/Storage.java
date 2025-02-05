@@ -6,6 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import lolok.task.Task;
+
+/**
+ * Represents a storage that can store or load data from a file path.
+ */
 public class Storage {
     private final String filePath;
 

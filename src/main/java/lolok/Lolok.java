@@ -1,7 +1,14 @@
 package lolok;
 
+import lolok.command.Command;
+import lolok.exception.LolokException;
+import lolok.task.TaskList;
+
+/**
+ * main class of the chatbot lolok
+ */
 public class Lolok {
-    private final String name = "duke.Lolok";
+    private final String name = "Lolok";
     private Storage storage;
     private TaskList taskList;
     private Command command;
@@ -17,6 +24,9 @@ public class Lolok {
         this.ui = new Ui();
     }
 
+    /**
+     * run the program
+     */
     public void run() {
         ui.greet(this.name);
         this.getUserInput();
