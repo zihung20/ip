@@ -1,9 +1,12 @@
-package lolok;
+package lolok.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+/**
+ * Represents a deadline task with a deadline time.
+ */
+public class Deadline extends Task {
     private final LocalDateTime by;
 
 
@@ -28,7 +31,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 }

@@ -2,6 +2,9 @@ package lolok;
 
 import java.util.Scanner;
 
+/**
+ * Represents the UI class that handles all print messages and UI-related methods.
+ */
 public class Ui {
     private final Scanner scanner;
 
@@ -21,6 +24,10 @@ public class Ui {
         return this.scanner.nextLine();
     }
 
+    /**
+     * Greets the user.
+     * @param myName The name of the chatbot.
+     */
     public void greet(String myName) {
         Ui.printLine();
         System.out.println("Hello! I'm " + myName);

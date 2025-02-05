@@ -1,4 +1,4 @@
-package lolok;
+package lolok.exception;
 
 public class LolokException extends RuntimeException {
     private final String message;

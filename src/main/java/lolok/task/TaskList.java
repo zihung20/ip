@@ -1,9 +1,16 @@
-package lolok;
+package lolok.task;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import lolok.command.Action;
+import lolok.Ui;
+import lolok.exception.InvalidDataException;
+
+/**
+ * Represents a list of tasks with functionality to add, print, mark, and delete tasks.
+ */
 public class TaskList {
     private final List<Task> list;
 
@@ -95,16 +102,14 @@ public class TaskList {
     /**
      * Marks the task in the list as done or undone, starting from index 1.
      *
-     * @param index the index of the task to be marked
+     * @param index  the index of the task to be marked
      * @param isDone true to mark the task as done, false to mark it as undone
      */
     public void markTask(int index, boolean isDone) {
         index--;
         Task task = this.list.get(index);
         task.setDone(isDone);
-        String message = isDone
-                ? "Nice! I've marked this task as done:"
-                : "OK, I've marked this task as not done yet:";
+        String message = isDone ? "Nice! I've marked this task as done:" : "OK, I've marked this task as not done yet:";
         Ui.printMessageBlock(message + "\n" + task);
     }
 
@@ -112,6 +117,10 @@ public class TaskList {
         return this.list;
     }
 
+    /**
+     * Searches and prints the tasks that match the provided keyword.
+     * @param keyword The keyword to search for in the task descriptions.
+     */
     public void searchTask(String keyword) {
         List<Task> ans = list.stream().filter(task -> task.matchKeyword(keyword)).toList();
         System.out.println("Here are the matching tasks in your list:");

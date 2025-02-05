@@ -1,4 +1,4 @@
-package lolok;
+package lolok.task;
 
 /**
  *  Represents a task with common properties and behaviors
