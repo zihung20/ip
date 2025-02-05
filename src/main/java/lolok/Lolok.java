@@ -3,6 +3,7 @@ package lolok;
 import lolok.command.Command;
 import lolok.exception.LolokException;
 import lolok.task.TaskList;
+import lolok.ui.Ui;
 
 /**
  * main class of the chatbot lolok
@@ -67,6 +68,10 @@ public class Lolok {
             }
         }
         this.exit();
+    }
+
+    public String getResponse(String input) {
+        return "hello";
     }
 
     public static void main(String[] args) {

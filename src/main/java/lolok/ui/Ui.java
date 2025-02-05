@@ -1,4 +1,4 @@
-package lolok;
+package lolok.ui;
 
 import java.util.Scanner;
 

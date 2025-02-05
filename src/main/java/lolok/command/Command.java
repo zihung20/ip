@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lolok.Storage;
-import lolok.Ui;
+import lolok.ui.Ui;
 import lolok.exception.IncorrectArgumentNumberException;
 import lolok.exception.InvalidCommandException;
 import lolok.task.Deadline;

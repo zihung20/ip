@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lolok.command.Action;
-import lolok.Ui;
+import lolok.ui.Ui;
 import lolok.exception.InvalidDataException;
 
 /**
