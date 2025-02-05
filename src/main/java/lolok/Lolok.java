@@ -1,5 +1,8 @@
 package lolok;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import lolok.command.Command;
 import lolok.exception.LolokException;
 import lolok.task.TaskList;
@@ -46,7 +49,6 @@ public class Lolok {
     private void exit() {
         this.storage.saveData(taskList.getList(), false);
         System.out.println("Bye. Hope to see you again soon!");
-        Ui.printLine();
     }
 
     private void getUserInput() {
@@ -59,7 +61,6 @@ public class Lolok {
                 command.executeCommand(taskList, ui, storage);
                 exit = command.isExit();
             } catch (LolokException e) {
-                // should already handle exception in duke.Command
                 System.out.println(e.toString());
             } finally {
                 if (!exit) {
@@ -71,7 +72,40 @@ public class Lolok {
     }
 
     public String getResponse(String input) {
-        return "hello";
+        try {
+            Command command = new Command(input.split(" "));
+            //ChatGpt:how to get the response from system.out
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream ps = new PrintStream(baos);
+
+            // Save the original System.out
+            PrintStream originalOut = System.out;
+
+            // Redirect System.out to the custom PrintStream
+            System.setOut(ps);
+            command.executeCommand(taskList, ui, storage);
+            boolean exit = command.isExit();
+            if (exit) {
+                this.exit();
+            }
+            String response = baos.toString();
+
+            // Flush and reset the ByteArrayOutputStream
+            baos.reset();
+
+            // Restore the original System.out
+            System.setOut(originalOut);
+
+            // Optionally flush the custom PrintStream
+            ps.flush();
+
+            // Return the captured response
+            return response;
+        } catch (LolokException e) {
+            // should already handle exception in lolok.Command
+            System.out.println(e.toString());
+            return "";
+        }
     }
 
     public static void main(String[] args) {
