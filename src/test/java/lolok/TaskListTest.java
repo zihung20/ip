@@ -1,5 +1,7 @@
 package lolok;
 
+import lolok.task.Todo;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

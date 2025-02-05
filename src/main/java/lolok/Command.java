@@ -1,7 +1,10 @@
 package lolok;
 
+import lolok.task.Deadline;
+import lolok.task.Event;
+import lolok.task.Todo;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Command {

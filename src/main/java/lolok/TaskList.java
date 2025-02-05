@@ -1,5 +1,10 @@
 package lolok;
 
+import lolok.task.Deadline;
+import lolok.task.Event;
+import lolok.task.Task;
+import lolok.task.Todo;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,11 @@
-package lolok;
+package lolok.task;
 
 import java.util.Objects;
 
-
-public class Todo extends Task{
+/**
+ * Represents a Todo class that models a task with no specific deadline.
+ */
+public class Todo extends Task {
     private final String description;
 
     /**

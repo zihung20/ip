@@ -1,5 +1,8 @@
 package lolok;
 
+import lolok.task.Deadline;
+import lolok.task.Task;
+
 import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeParseException;

@@ -1,8 +1,11 @@
-package lolok;
+package lolok.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task with a start time and an end time.
+ */
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
