@@ -1,0 +1,78 @@
+/* Root styling with a fresh and elegant background */
+.root {
+    -main-color: rgb(237, 255, 242); /* Define a theme color */
+    -accent-color: #50c878; /* Emerald green for accents */
+    -hover-color: #38b48b; /* Darker green for hover effects */
+    -pressed-color: #ff7f50; /* Coral for pressed buttons */
+    -text-color: #2b2b2b; /* Dark text for readability */
+
+    -fx-background-color: -main-color;
+    -fx-font-family: sans-serif;
+}
+
+/* Text Field Styling */
+.text-field {
+    -fx-background-color: #d9ffe2;
+    -fx-font-size: 18px;
+    -fx-font-family: sans-serif;
+    -fx-text-fill: -text-color;
+    -fx-padding: 8px;
+    -fx-border-color: #50c878;
+    -fx-border-radius: 0 0 0 8px;
+}
+
+/* Buttons with a modern gradient effect */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #7fffaf, -accent-color);
+    -fx-background-radius: 0 8px 8px 0;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-padding: 8px 16px;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 5, 0, 2, 2);
+}
+
+/* Button Hover Effects */
+.button:hover {
+    -fx-background-color: -hover-color;
+    -fx-font-size: 18px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 7, 0, 3, 3);
+}
+
+/* Button Pressed Effect */
+.button:pressed {
+    -fx-background-color: -pressed-color;
+    -fx-font-size: 18px;
+}
+
+/* ScrollPane Styling */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: #50c878;
+    -fx-border-radius: 8px;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Custom Scroll Bar */
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+/* Scroll Thumb */
+.scroll-bar .thumb {
+    -fx-background-color: #ff9cb4;
+    -fx-background-radius: 10px;
+}
+
+/* Hide Scroll Increment & Decrement Buttons */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}

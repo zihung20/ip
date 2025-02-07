@@ -5,14 +5,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.TextFlow?>
 
-<fx:root alignment="TOP_RIGHT" spacing="8.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-      <TextFlow fx:id="dialog" textAlignment="RIGHT">
-          <!-- Text will be dynamically added in the controller -->
-      </TextFlow>
-        <ImageView fx:id="displayPicture" fitHeight="89.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true" />
-    </children>
+<fx:root alignment="TOP_RIGHT" spacing="8.0" stylesheets="@../css/dialog-box.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
+    <TextFlow fx:id="dialog" textAlignment="RIGHT">
+        <!-- Text will be dynamically added in the controller -->
+    </TextFlow>
+    <ImageView fx:id="displayPicture" fitHeight="89.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true" />
 </fx:root>
