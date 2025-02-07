@@ -22,7 +22,7 @@ public enum Action {
     }
 
     public int getArgumentCount() {
-        return this.argumentCount;
+        return argumentCount;
     }
 
     /**

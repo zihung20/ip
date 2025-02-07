@@ -5,29 +5,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lolok.command.Action;
-import lolok.ui.Ui;
 import lolok.exception.InvalidDataException;
-
+import lolok.ui.Ui;
 /**
  * Represents a list of tasks with functionality to add, print, mark, and delete tasks.
  */
 public class TaskList {
-    private final List<Task> list;
-
+    private final List<Task> list = new ArrayList<>();
     /**
      * Creates an instance of a list of tasks that can perform adding, printing, marking, and deleting.
      *
      * @param stringList a list of formatted strings to convert to task instances
      */
     public TaskList(List<String> stringList) {
-        this.list = new ArrayList<>();
         for (String s : stringList) {
-            loadToApplication(s);
+            loadTask(s);
         }
     }
 
-    private void loadToApplication(String taskString) {
-        //[Type]|[Status]|[Name]|[Argument1]|[Argument2]|..
+    /**
+     * Loads a task into the task list, which represents a list of tasks.
+     *
+     * @param taskString - String representation of a task,
+     *                     formatted as `[Type]|[Status]|[Name]|[Argument1]|[Argument2]|...`
+     */
+    private void loadTask(String taskString) {
         try {
             String[] stringArray = taskString.split("\\|");
             if (stringArray[0].equals("C")) {
@@ -41,21 +43,21 @@ public class TaskList {
 
             switch (action) {
             case TODO:
-                this.list.add(new Todo(stringArray[2]));
+                list.add(new Todo(stringArray[2]));
                 break;
             case DEADLINE:
-                this.list.add(new Deadline(stringArray[2], stringArray[3]));
+                list.add(new Deadline(stringArray[2], stringArray[3]));
                 break;
             case EVENT:
-                this.list.add(new Event(stringArray[2], stringArray[3], stringArray[4]));
+                list.add(new Event(stringArray[2], stringArray[3], stringArray[4]));
                 break;
             default:
                 throw new InvalidDataException("Unsupported action: " + action);
             }
         } catch (InvalidDataException e) {
-            System.out.println("Some errors occur while reading data. " + e.getMessage());
+            Ui.printErrorMessage("Some errors occur while reading data. " + e.getMessage());
         } catch (DateTimeParseException e) {
-            System.out.println("The date format of the data cannot be parsed. " + e.getMessage());
+            Ui.printErrorMessage("The date format of the data cannot be parsed. " + e.getMessage());
         }
     }
 
@@ -65,20 +67,21 @@ public class TaskList {
      * @param task the task to be added to the list
      */
     public void addToList(Task task) {
-        this.list.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.printf("Now you have %d tasks in the list.%n", list.size());
+        list.add(task);
+        String message = "Got it. I've added this task:\n" + task.toString() + "\n";
+        message += String.format("Now you have %d tasks in the list.%n", list.size());
+        Ui.printMessage(message);
     }
 
     /**
      * Prints the tasks in the list.
      */
     public void printList() {
-        System.out.println("Here are the tasks in your list:");
+        StringBuilder builder = new StringBuilder("Here are the tasks in your list: \n");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + "." + list.get(i).toString());
+            builder.append(String.format("%d. %s \n", (i + 1), list.get(i).toString()));
         }
+        Ui.printMessage(builder.toString());
     }
 
     /**
@@ -89,13 +92,13 @@ public class TaskList {
     public void deleteTask(int index) {
         index = index - 1;
         try {
-            Task task = this.list.get(index);
-            this.list.remove(index);
+            Task task = list.get(index);
+            list.remove(index);
             String message = "Noted. I've removed this task:\n";
             String taskAmount = String.format("Now you have %d tasks in the list.", list.size());
             Ui.printMessage(message + task.toString() + "\n" + taskAmount);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printMessage("Oops! Index" + (index + 1) + "is invalid or doesn't have any task.");
+            Ui.printErrorMessage("Index" + (index + 1) + "is invalid or doesn't have any task.");
         }
     }
 
@@ -114,7 +117,7 @@ public class TaskList {
     }
 
     public List<Task> getList() {
-        return this.list;
+        return list;
     }
 
     /**
@@ -123,9 +126,10 @@ public class TaskList {
      */
     public void searchTask(String keyword) {
         List<Task> ans = list.stream().filter(task -> task.matchKeyword(keyword)).toList();
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder builder = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < ans.size(); i++) {
-            System.out.println((i + 1) + "." + ans.get(i).toString());
+            builder.append(String.format("%d. %s", (i + 1), ans.get(i).toString()));
         }
+        Ui.printMessage(builder.toString());
     }
 }

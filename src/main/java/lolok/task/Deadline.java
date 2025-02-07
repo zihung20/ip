@@ -19,19 +19,18 @@ public class Deadline extends Task {
     public Deadline(String description, String date) {
         super(description);
         DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
-        this.by = LocalDateTime.parse(date, parseFormat);
+        by = LocalDateTime.parse(date, parseFormat);
     }
 
 
     @Override
     public String toFormatString() {
-        return "D|" + super.toFormatString() + "|"
-                + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"));
+        return "D|" + super.toFormatString() + "|" + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"));
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 }
