@@ -16,8 +16,8 @@ import lolok.ui.Ui;
  * Represents a command that executes and processes the given command.
  */
 public class Command {
-    private String[] blocks;
-    private String type;
+    private final String[] blocks;
+    private final String type;
     private boolean isExit = false;
 
     /**
@@ -27,7 +27,7 @@ public class Command {
      */
     public Command(String[] block) {
         this.blocks = block;
-        this.type = block[0];
+        type = block[0];
     }
 
     private String[] getArgument(int count) throws IncorrectArgumentNumberException {
@@ -112,6 +112,6 @@ public class Command {
      * @return true if the command is an exit command, otherwise false
      */
     public boolean isExit() {
-        return this.isExit;
+        return isExit;
     }
 }

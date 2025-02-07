@@ -42,12 +42,12 @@ public class Lolok {
      * @param path the file path to read data from
      */
     private void readData(String path) {
-        this.storage = new Storage(path);
-        this.taskList = new TaskList(storage.loadData());
+        storage = new Storage(path);
+        taskList = new TaskList(storage.loadData());
     }
 
     private void exit() {
-        this.storage.saveData(taskList.getList(), false);
+        storage.saveData(taskList.getList(), false);
         Ui.printMessage("Bye. Hope to see you again soon!");
     }
 
@@ -61,7 +61,7 @@ public class Lolok {
                 command.executeCommand(taskList, ui, storage);
                 exit = command.isExit();
             } catch (LolokException e) {
-                System.out.println(e.toString());
+                Ui.printErrorMessage(e.toString());
             } finally {
                 if (!exit) {
                     Ui.printLine();
@@ -97,9 +97,11 @@ public class Lolok {
         }
     }
 
+    /* not use now
     public static void main(String[] args) {
         String defaultPath = "./data/lolok_data.txt";
         Lolok lolok = new Lolok(defaultPath);
         lolok.run();
     }
+    */
 }

@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import lolok.task.Task;
+import lolok.ui.Ui;
 
 /**
  * Represents a storage that can store or load data from a file path.
@@ -30,10 +31,10 @@ public class Storage {
      */
     public List<String> loadData() {
         try {
-            System.out.println("Reading file from " + this.filePath + "...");
-            return Files.readAllLines(Paths.get(this.filePath));
+            Ui.printMessage("Reading file from " + filePath + "...");
+            return Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
-            System.out.println("We can't read data from the path: " + e.getMessage());
+            Ui.printErrorMessage("We can't read data from the path: " + e.getMessage());
             return List.of();
         }
     }
@@ -45,14 +46,14 @@ public class Storage {
      * @param append true if the data should be appended to the existing file
      */
     public void saveData(List<Task> tasks, boolean append) {
-        System.out.println("Saving tasks...");
+        Ui.printMessage("Saving tasks...");
         //FileWriter create file when it does not exist
-        try (FileWriter fw = new FileWriter(this.filePath, append)) {
+        try (FileWriter fw = new FileWriter(filePath, append)) {
             for (Task t : tasks) {
                 fw.write(t.toFormatString() + System.lineSeparator());
             }
         } catch (IOException e) {
-            System.out.println("Something wrong when saving the file" + e.getMessage());
+            Ui.printErrorMessage("Something wrong when saving the file" + e.getMessage());
         }
     }
 }
