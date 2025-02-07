@@ -9,28 +9,40 @@ public class Ui {
     private final Scanner scanner;
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     public static void printLine() {
         System.out.println("_".repeat(32));
     }
 
-    public static void printMessage(String message) {
-        System.out.println(message);
+    /**
+     * Prints each message on a new line.
+     * @param messages - A variable number of messages to be printed, each appearing on a separate line.
+     */
+    public static void printMessage(String... messages) {
+        for (String message : messages) {
+            System.out.println(message);
+        }
+    }
+
+    //print error message
+    public static void printErrorMessage(String error) {
+        System.out.println("Some errors happened...");
+        System.out.println(error);
     }
 
     public String readCommand() {
-        return this.scanner.nextLine();
+        return scanner.nextLine();
     }
 
     /**
      * Greets the user.
-     * @param myName The name of the chatbot.
+     * @param chatBotName The name of the chatbot.
      */
-    public void greet(String myName) {
+    public void greet(String chatBotName) {
         Ui.printLine();
-        System.out.println("Hello! I'm " + myName);
+        System.out.println("Hello! I'm " + chatBotName);
         System.out.println("What can I do for you?");
         Ui.printLine();
     }
