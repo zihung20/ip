@@ -8,10 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -19,7 +21,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private TextFlow dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -32,8 +34,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        dialog.setText(text);
+        dialog.getChildren().add(new Text(text));
         displayPicture.setImage(img);
     }
 
@@ -46,7 +47,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         dialog.getStyleClass().add("reply-label");
-
+        dialog.setTextAlignment(TextAlignment.LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
