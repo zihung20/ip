@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lolok.Storage;
-import lolok.Ui;
 import lolok.exception.IncorrectArgumentNumberException;
 import lolok.exception.InvalidCommandException;
 import lolok.task.Deadline;
 import lolok.task.Event;
 import lolok.task.TaskList;
 import lolok.task.Todo;
-
+import lolok.ui.Ui;
 
 /**
  * Represents a command that executes and processes the given command.
@@ -54,11 +53,6 @@ public class Command {
         }
         return ans.toArray(new String[]{});
     }
-
-    private String getType() {
-        return this.type;
-    }
-
     /**
      * Executes the command accordingly, using the environment passed as parameters.
      *
@@ -75,13 +69,12 @@ public class Command {
             taskList.printList();
             break;
         default:
-            multipleArgumentCommand(taskList);
+            executeMultipleArgumentCommand(taskList);
         }
     }
 
-    private void multipleArgumentCommand(TaskList taskList) {
+    private void executeMultipleArgumentCommand(TaskList taskList) {
         try {
-            String type = this.getType();
             //https://www.geeksforgeeks.org/list-contains-method-in-java-with-examples/
             if (List.of("mark", "unmark", "delete").contains(type)) {
                 String[] arg = this.getArgument(1);
@@ -89,7 +82,7 @@ public class Command {
                     taskList.deleteTask(Integer.parseInt(arg[0]));
 
                 } else {
-                    taskList.markTask(Integer.parseInt(arg[0]), this.getType().equals("mark"));
+                    taskList.markTask(Integer.parseInt(arg[0]), type.equals("mark"));
                 }
             } else if (type.equals("todo")) {
                 String[] arg = this.getArgument(1);
@@ -107,9 +100,9 @@ public class Command {
                 throw new InvalidCommandException(type);
             }
         } catch (InvalidCommandException e) {
-            Ui.printMessageBlock(e.toString());
+            Ui.printMessage(e.toString());
         } catch (IncorrectArgumentNumberException e) {
-            Ui.printMessageBlock(e.toString());
+            Ui.printMessage(e.toString());
         }
     }
 

@@ -1,8 +1,12 @@
 package lolok;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import lolok.command.Command;
 import lolok.exception.LolokException;
 import lolok.task.TaskList;
+import lolok.ui.Ui;
 
 /**
  * main class of the chatbot lolok
@@ -44,8 +48,7 @@ public class Lolok {
 
     private void exit() {
         this.storage.saveData(taskList.getList(), false);
-        System.out.println("Bye. Hope to see you again soon!");
-        Ui.printLine();
+        Ui.printMessage("Bye. Hope to see you again soon!");
     }
 
     private void getUserInput() {
@@ -58,7 +61,6 @@ public class Lolok {
                 command.executeCommand(taskList, ui, storage);
                 exit = command.isExit();
             } catch (LolokException e) {
-                // should already handle exception in duke.Command
                 System.out.println(e.toString());
             } finally {
                 if (!exit) {
@@ -67,6 +69,32 @@ public class Lolok {
             }
         }
         this.exit();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = new Command(input.split(" "));
+            //ChatGpt:how to get the response from system.out
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream ps = new PrintStream(baos);
+
+            PrintStream originalOut = System.out;
+            System.setOut(ps);
+            command.executeCommand(taskList, ui, storage);
+            boolean exit = command.isExit();
+            if (exit) {
+                this.exit();
+            }
+            String response = baos.toString();
+            baos.reset();
+            System.setOut(originalOut);
+            ps.flush();
+            return response;
+        } catch (LolokException e) {
+            // should already handle exception in lolok.Command
+            System.out.println(e.toString());
+            return "";
+        }
     }
 
     public static void main(String[] args) {
