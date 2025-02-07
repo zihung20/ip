@@ -12,7 +12,7 @@ public abstract class Task {
     }
 
     public boolean matchKeyword(String keyword) {
-        return this.description.contains(keyword);
+        return description.contains(keyword);
     }
 
     public void setDone(boolean isDone) {
@@ -20,7 +20,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " "); // mark done task with X
+        return isDone ? "X" : " "; // mark done task with X
     }
 
     /**
@@ -29,7 +29,7 @@ public abstract class Task {
      * @return a formatted string for storing data
      */
     public String toFormatString() {
-        return this.getStatusIcon() + "|" + this.description;
+        return getStatusIcon() + "|" + description;
     }
 
     /**
@@ -39,6 +39,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
