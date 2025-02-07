@@ -48,7 +48,7 @@ public class Lolok {
 
     private void exit() {
         this.storage.saveData(taskList.getList(), false);
-        System.out.println("Bye. Hope to see you again soon!");
+        Ui.printMessage("Bye. Hope to see you again soon!");
     }
 
     private void getUserInput() {
@@ -78,10 +78,7 @@ public class Lolok {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             PrintStream ps = new PrintStream(baos);
 
-            // Save the original System.out
             PrintStream originalOut = System.out;
-
-            // Redirect System.out to the custom PrintStream
             System.setOut(ps);
             command.executeCommand(taskList, ui, storage);
             boolean exit = command.isExit();
@@ -89,17 +86,9 @@ public class Lolok {
                 this.exit();
             }
             String response = baos.toString();
-
-            // Flush and reset the ByteArrayOutputStream
             baos.reset();
-
-            // Restore the original System.out
             System.setOut(originalOut);
-
-            // Optionally flush the custom PrintStream
             ps.flush();
-
-            // Return the captured response
             return response;
         } catch (LolokException e) {
             // should already handle exception in lolok.Command

@@ -93,9 +93,9 @@ public class TaskList {
             this.list.remove(index);
             String message = "Noted. I've removed this task:\n";
             String taskAmount = String.format("Now you have %d tasks in the list.", list.size());
-            Ui.printMessageBlock(message + task.toString() + "\n" + taskAmount);
+            Ui.printMessage(message + task.toString() + "\n" + taskAmount);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printMessageBlock("Oops! Index" + (index + 1) + "is invalid or doesn't have any task.");
+            Ui.printMessage("Oops! Index" + (index + 1) + "is invalid or doesn't have any task.");
         }
     }
 
@@ -110,7 +110,7 @@ public class TaskList {
         Task task = this.list.get(index);
         task.setDone(isDone);
         String message = isDone ? "Nice! I've marked this task as done:" : "OK, I've marked this task as not done yet:";
-        Ui.printMessageBlock(message + "\n" + task);
+        Ui.printMessage(message + "\n" + task);
     }
 
     public List<Task> getList() {

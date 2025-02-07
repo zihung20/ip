@@ -16,7 +16,7 @@ public class Ui {
         System.out.println("_".repeat(32));
     }
 
-    public static void printMessageBlock(String message) {
+    public static void printMessage(String message) {
         System.out.println(message);
     }
 
