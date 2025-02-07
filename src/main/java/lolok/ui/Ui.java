@@ -17,8 +17,8 @@ public class Ui {
     }
 
     /**
-     * Prints each message on a new line.
-     * @param messages - A variable number of messages to be printed, each appearing on a separate line.
+     * Prints each message on a new line
+     * @param messages - A variable number of messages to be printed, each appearing on a separate line
      */
     public static void printMessage(String... messages) {
         for (String message : messages) {
@@ -26,7 +26,11 @@ public class Ui {
         }
     }
 
-    //print error message
+    /**
+     * Prints an error message.
+     *
+     * @param error - The error message to be printed
+     */
     public static void printErrorMessage(String error) {
         System.out.println("Some errors happened...");
         System.out.println(error);
@@ -37,8 +41,8 @@ public class Ui {
     }
 
     /**
-     * Greets the user.
-     * @param chatBotName The name of the chatbot.
+     * Greets the user
+     * @param chatBotName The name of the chatbot
      */
     public void greet(String chatBotName) {
         Ui.printLine();
