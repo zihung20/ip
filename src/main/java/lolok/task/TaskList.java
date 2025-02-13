@@ -68,12 +68,18 @@ public class TaskList {
      * @param task the task to be added to the list
      */
     public void addToList(Task task) {
+        if (isDuplicate(task)) {
+            Ui.printMessage(task.toString(), "The task is duplicated and we don't allow duplicate task");
+            return;
+        }
         list.add(task);
         String message = "Got it. I've added this task:\n" + task.toString() + "\n";
         message += String.format("Now you have %d tasks in the list.%n", list.size());
         Ui.printMessage(message);
     }
-
+    private boolean isDuplicate(Task task) {
+        return list.stream().anyMatch(t -> t.equals(task));
+    }
     /**
      * Prints the tasks in the list.
      */

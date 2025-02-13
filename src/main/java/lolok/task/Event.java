@@ -3,6 +3,7 @@ package lolok.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * Represents an event task with a start time and an end time.
  */
@@ -35,5 +36,13 @@ public class Event extends Task {
         return "[E]" + super.toString()
                 + " (from: " + from.format(DateTimeFormatter.ofPattern(OUTPUT_DATETIME_FORMAT))
                 + " to: " + to.format(DateTimeFormatter.ofPattern(OUTPUT_DATETIME_FORMAT)) + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event temp) {
+            return super.equals(temp) && temp.from.equals(this.from) && temp.to.equals(this.to);
+        }
+        return false;
     }
 }

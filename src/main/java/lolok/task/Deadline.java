@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDateTime by;
 
-
     /**
      * Constructs a Deadline instance, which is a subclass of Task.
      *
@@ -32,5 +31,13 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + by.format(DateTimeFormatter.ofPattern(OUTPUT_DATETIME_FORMAT)) + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline temp) {
+            return super.equals(temp) && temp.by.equals(this.by);
+        }
+        return false;
     }
 }

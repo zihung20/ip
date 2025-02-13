@@ -1,5 +1,7 @@
 package lolok.task;
 
+import java.util.Objects;
+
 /**
  *  Represents a task with common properties and behaviors
  */
@@ -42,5 +44,13 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task temp) {
+            return Objects.equals(temp.description, this.description);
+        }
+        return false;
     }
 }

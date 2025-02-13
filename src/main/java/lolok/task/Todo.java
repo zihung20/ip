@@ -30,9 +30,6 @@ public class Todo extends Task {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Todo temp) {
-            return Objects.equals(temp.description, this.description);
-        }
-        return false;
+        return super.equals(obj);
     }
 }
