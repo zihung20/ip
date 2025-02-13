@@ -30,6 +30,9 @@ public class Command {
     }
 
     private String[] getArgument(int count) throws IncorrectArgumentNumberException {
+        //There must be at least one argument for the those multiple argument command
+        assert count > 0;
+
         ArrayList<String> ans = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         for (int i = 1; i < blocks.length; i++) {
