@@ -19,21 +19,21 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
-        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
+        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(DATA_DATETIME_FORMAT);
         this.from = LocalDateTime.parse(from, parseFormat);
         this.to = LocalDateTime.parse(to, parseFormat);
     }
 
     @Override
     public String toFormatString() {
-        return "E|" + super.toFormatString() + "|" + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"))
-                + "|" + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"));
+        return "E|" + super.toFormatString() + "|" + from.format(DateTimeFormatter.ofPattern(DATA_DATETIME_FORMAT))
+                + "|" + to.format(DateTimeFormatter.ofPattern(DATA_DATETIME_FORMAT));
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"))
-                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
+                + " (from: " + from.format(DateTimeFormatter.ofPattern(OUTPUT_DATETIME_FORMAT))
+                + " to: " + to.format(DateTimeFormatter.ofPattern(OUTPUT_DATETIME_FORMAT)) + ")";
     }
 }
