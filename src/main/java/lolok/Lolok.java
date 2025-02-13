@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import lolok.command.Command;
 import lolok.exception.InvalidCommandException;
 import lolok.exception.LolokException;
+import lolok.storage.Storage;
 import lolok.task.TaskList;
 import lolok.ui.Ui;
 
@@ -16,8 +17,7 @@ public class Lolok {
     private final String name = "Lolok";
     private Storage storage;
     private TaskList taskList;
-    private Command command;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Creates an instance of the Lolok chatbot that loads and stores data using the given file path.
@@ -77,7 +77,7 @@ public class Lolok {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         PrintStream originalOut = System.out;
-        String response = "";
+        String response;
         try {
             System.setOut(ps);
 

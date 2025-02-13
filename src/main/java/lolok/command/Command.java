@@ -1,9 +1,8 @@
 package lolok.command;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import lolok.Storage;
+import lolok.storage.Storage;
 import lolok.exception.IncorrectArgumentNumberException;
 import lolok.exception.InvalidCommandException;
 import lolok.task.Deadline;
