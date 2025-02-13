@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import lolok.command.Command;
+import lolok.exception.InvalidCommandException;
 import lolok.exception.LolokException;
 import lolok.task.TaskList;
 import lolok.ui.Ui;
@@ -72,29 +73,29 @@ public class Lolok {
     }
 
     public String getResponse(String input) {
+        //ChatGpt:how to get the response from system.out
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream originalOut = System.out;
+        String response = "";
         try {
-            Command command = new Command(input.split(" "));
-            //ChatGpt:how to get the response from system.out
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            PrintStream ps = new PrintStream(baos);
-
-            PrintStream originalOut = System.out;
             System.setOut(ps);
+
+            Command command = new Command(input.split(" "));
             command.executeCommand(taskList, ui, storage);
             boolean exit = command.isExit();
             if (exit) {
                 this.exit();
             }
-            String response = baos.toString();
+        } catch (InvalidCommandException e) {
+            Ui.printErrorMessage(e.toString());
+        } finally {
+            response = baos.toString();
             baos.reset();
             System.setOut(originalOut);
             ps.flush();
-            return response;
-        } catch (LolokException e) {
-            // should already handle exception in lolok.Command
-            System.out.println(e.toString());
-            return "";
         }
+        return response;
     }
 
     /* not use now

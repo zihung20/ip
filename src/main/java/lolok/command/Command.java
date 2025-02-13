@@ -17,7 +17,7 @@ import lolok.ui.Ui;
  */
 public class Command {
     private final String[] blocks;
-    private final String type;
+    private final Action type;
     private boolean isExit = false;
 
     /**
@@ -25,9 +25,9 @@ public class Command {
      *
      * @param block an array of strings, where each index represents an argument
      */
-    public Command(String[] block) {
+    public Command(String[] block) throws InvalidCommandException {
         this.blocks = block;
-        type = block[0];
+        type = Action.parseCommand(block[0]);
     }
 
     private String[] getArgument(int count) throws IncorrectArgumentNumberException {
@@ -61,11 +61,11 @@ public class Command {
      * @param storage the Storage instance to manage data persistence
      */
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) {
-        switch (blocks[0]) {
-        case "bye":
+        switch (type) {
+        case BYE:
             isExit = true;
             break;
-        case "list":
+        case LIST:
             taskList.printList();
             break;
         default:
@@ -74,30 +74,24 @@ public class Command {
     }
 
     private void executeMultipleArgumentCommand(TaskList taskList) {
+        assert type != null;
         try {
-            //https://www.geeksforgeeks.org/list-contains-method-in-java-with-examples/
-            if (List.of("mark", "unmark", "delete").contains(type)) {
-                String[] arg = this.getArgument(1);
-                if (type.equals("delete")) {
-                    taskList.deleteTask(Integer.parseInt(arg[0]));
-
-                } else {
-                    taskList.markTask(Integer.parseInt(arg[0]), type.equals("mark"));
-                }
-            } else if (type.equals("todo")) {
-                String[] arg = this.getArgument(1);
-                taskList.addToList(new Todo(arg[0]));
-            } else if (type.equals("deadline")) {
-                String[] arg = this.getArgument(2);
-                taskList.addToList(new Deadline(arg[0], arg[1]));
-            } else if (type.equals("event")) {
-                String[] arg = this.getArgument(3);
-                taskList.addToList(new Event(arg[0], arg[1], arg[2]));
-            } else if (type.equals("find")) {
-                String[] arg = this.getArgument(1);
-                taskList.searchTask(arg[0]);
-            } else {
-                throw new InvalidCommandException(type);
+            String[] arg = getArgument(type.getArgumentCount());
+            switch (type) {
+            case MARK, UNMARK -> {
+                int taskIndex = Integer.parseInt(arg[0]);
+                taskList.markTask(taskIndex, "mark".equals(blocks[0]));
+            }
+            case DELETE -> {
+                int taskIndex = Integer.parseInt(arg[0]);
+                taskList.deleteTask(taskIndex);
+            }
+            case TODO -> taskList.addToList(new Todo(arg[0]));
+            case DEADLINE -> taskList.addToList(new Deadline(arg[0], arg[1]));
+            case EVENT -> taskList.addToList(new Event(arg[0], arg[1], arg[2]));
+            case FIND -> taskList.searchTask(arg[0]);
+            //should not have invalid command
+            default -> throw new InvalidCommandException(blocks[0]);
             }
         } catch (InvalidCommandException e) {
             Ui.printMessage(e.toString());
