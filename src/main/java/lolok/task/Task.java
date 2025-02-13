@@ -4,6 +4,8 @@ package lolok.task;
  *  Represents a task with common properties and behaviors
  */
 public abstract class Task {
+    public static final String OUTPUT_DATETIME_FORMAT = "MMM d yyyy, HH:mm";
+    public static final String DATA_DATETIME_FORMAT = "yyyy-MM-dd, HH:mm";
     private final String description;
     private boolean isDone = false;
 

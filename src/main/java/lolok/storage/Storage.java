@@ -1,4 +1,4 @@
-package lolok;
+package lolok.storage;
 
 import java.io.FileWriter;
 import java.io.IOException;

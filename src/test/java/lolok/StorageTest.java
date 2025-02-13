@@ -1,5 +1,7 @@
 package lolok;
 
+import lolok.storage.Storage;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

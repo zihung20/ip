@@ -10,6 +10,6 @@ public class InvalidCommandException extends LolokException {
 
     @Override
     public String toString() {
-        return "Invalid duke.Command. Don't know what '" + this.type + "' means";
+        return "Invalid Command. Don't know what '" + this.type + "' means";
     }
 }
