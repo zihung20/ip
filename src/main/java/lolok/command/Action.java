@@ -28,6 +28,9 @@ public enum Action {
         return argumentCount;
     }
 
+    public boolean hasKeyword() {
+        return this == DEADLINE || this == EVENT;
+    }
     /**
      * parse a string type data to Enum type of action
      * @param type the string representation of the type

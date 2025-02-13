@@ -1,10 +1,11 @@
 package lolok.command;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import lolok.storage.Storage;
 import lolok.exception.IncorrectArgumentNumberException;
 import lolok.exception.InvalidCommandException;
+import lolok.storage.Storage;
 import lolok.task.Deadline;
 import lolok.task.Event;
 import lolok.task.TaskList;
@@ -21,7 +22,7 @@ public class Command {
 
     /**
      * Constructs a new instance of a command that processes the given arguments.
-     *
+     * syntax: command description /keyword argument1 /keyword argument2 ...
      * @param block an array of strings, where each index represents an argument
      */
     public Command(String[] block) throws InvalidCommandException {
@@ -29,31 +30,89 @@ public class Command {
         type = Action.parseCommand(block[0]);
     }
 
-    private String[] getArgument(int count) throws IncorrectArgumentNumberException {
+    private String[] getArgument(int count, Action type) throws IncorrectArgumentNumberException {
         //There must be at least one argument for the those multiple argument command
         assert count > 0;
+        // type should be instanceof Action, if not, valid value is only null
+        assert type != null;
+        if (blocks.length < 2) {
+            throw new IncorrectArgumentNumberException("Incorrect number of argument: " + blocks.length);
+        }
+        if (type.hasKeyword()) {
+            return getArgumentWithKeyword(count);
+        } else {
+            assert count == 1 : "the argument don't have key word should only have 1 argument";
+            return new String[]{getDescription()};
+        }
+    }
+    /**
+     * Retrieves arguments that are explicitly associated with keywords and places them in standardized positions.
+     *
+     * @param numberOfArguments The expected number of arguments.
+     * @return An array of strings representing the arguments in their correct positions.
+     * @throws IncorrectArgumentNumberException If the number of provided arguments does not match the expected count
+     *         or if the number of keyword arguments is incorrect.
+     */
+    private String[] getArgumentWithKeyword(int numberOfArguments) throws IncorrectArgumentNumberException {
+        Map<String, Keyword> map = getStringKeywordMap(numberOfArguments);
+        return getKeywordArgument(numberOfArguments, map);
+    }
 
-        ArrayList<String> ans = new ArrayList<>();
+    private Map<String, Keyword> getStringKeywordMap(int numberOfArguments) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 1; i < blocks.length; i++) {
-            if (blocks[i].startsWith("/")) {
-                ans.add(builder.toString());
+        Map<String, Keyword> map = new HashMap<>();
+        int index = 2;
+        //find the first keyword
+        while (index < blocks.length && Keyword.parseKeyword(blocks[index]) == Keyword.UNKNOWN) {
+            index++;
+        }
+        Keyword previousKeyword = null;
+        if (index < blocks.length) {
+            previousKeyword = Keyword.parseKeyword(blocks[index]);
+        }
+        index++;
+        while (index < blocks.length) {
+            Keyword current = Keyword.parseKeyword(blocks[index]);
+            if (current != Keyword.UNKNOWN) {
+                map.put(builder.toString(), previousKeyword);
+                previousKeyword = current;
                 builder = new StringBuilder();
             } else {
                 if (!builder.isEmpty()) {
                     builder.append(" ");
                 }
-                builder.append(blocks[i]);
+                builder.append(blocks[index]);
             }
+            index++;
         }
         if (!builder.isEmpty()) {
-            ans.add(builder.toString());
+            map.put(builder.toString(), previousKeyword);
         }
-        if (ans.size() != count) {
-            throw new IncorrectArgumentNumberException("The number of arguments for "
-                    + type + " is not as expected!");
+        if (map.size() != numberOfArguments - 1) {
+            throw new IncorrectArgumentNumberException("Expected argument keyword numbers: " + numberOfArguments
+                    + "Got: " + map.size() + 1);
         }
-        return ans.toArray(new String[]{});
+        return map;
+    }
+    private String[] getKeywordArgument(int numberOfArguments, Map<String, Keyword> map) {
+        String[] ans = new String[numberOfArguments];
+        ans[0] = getDescription();
+        for (Map.Entry<String, Keyword> entry : map.entrySet()) {
+            ans[entry.getValue().getPosition()] = entry.getKey();
+        }
+        return ans;
+    }
+    private String getDescription() {
+        int i = 1;
+        StringBuilder builder = new StringBuilder();
+        while (i < blocks.length && Keyword.parseKeyword(blocks[i]) == Keyword.UNKNOWN) {
+            if (!builder.isEmpty()) {
+                builder.append(" ");
+            }
+            builder.append(blocks[i]);
+            i++;
+        }
+        return builder.toString();
     }
     /**
      * Executes the command accordingly, using the environment passed as parameters.
@@ -78,7 +137,7 @@ public class Command {
     private void executeMultipleArgumentCommand(TaskList taskList) {
         assert type != null;
         try {
-            String[] arg = getArgument(type.getArgumentCount());
+            String[] arg = getArgument(type.getArgumentCount(), type);
             switch (type) {
             case MARK, UNMARK -> {
                 int taskIndex = Integer.parseInt(arg[0]);
