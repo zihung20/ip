@@ -31,6 +31,9 @@ public class Command {
     }
 
     private String[] getArgument(int count) throws IncorrectArgumentNumberException {
+        //There must be at least one argument for the those multiple argument command
+        assert count > 0;
+
         ArrayList<String> ans = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         for (int i = 1; i < blocks.length; i++) {
@@ -85,16 +88,16 @@ public class Command {
                     taskList.markTask(Integer.parseInt(arg[0]), type.equals("mark"));
                 }
             } else if (type.equals("todo")) {
-                String[] arg = this.getArgument(1);
+                String[] arg = getArgument(1);
                 taskList.addToList(new Todo(arg[0]));
             } else if (type.equals("deadline")) {
-                String[] arg = this.getArgument(2);
+                String[] arg = getArgument(2);
                 taskList.addToList(new Deadline(arg[0], arg[1]));
             } else if (type.equals("event")) {
-                String[] arg = this.getArgument(3);
+                String[] arg = getArgument(3);
                 taskList.addToList(new Event(arg[0], arg[1], arg[2]));
             } else if (type.equals("find")) {
-                String[] arg = this.getArgument(1);
+                String[] arg = getArgument(1);
                 taskList.searchTask(arg[0]);
             } else {
                 throw new InvalidCommandException(type);
