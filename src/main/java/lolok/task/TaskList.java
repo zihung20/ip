@@ -3,6 +3,7 @@ package lolok.task;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import lolok.command.Action;
 import lolok.exception.InvalidDataException;
@@ -78,9 +79,8 @@ public class TaskList {
      */
     public void printList() {
         StringBuilder builder = new StringBuilder("Here are the tasks in your list: \n");
-        for (int i = 0; i < list.size(); i++) {
-            builder.append(String.format("%d. %s \n", (i + 1), list.get(i).toString()));
-        }
+        IntStream.range(0, list.size())
+                 .forEach(i -> builder.append(String.format("%d. %s \n", (i + 1), list.get(i).toString())));
         Ui.printMessage(builder.toString());
     }
 
@@ -127,9 +127,8 @@ public class TaskList {
     public void searchTask(String keyword) {
         List<Task> ans = list.stream().filter(task -> task.matchKeyword(keyword)).toList();
         StringBuilder builder = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < ans.size(); i++) {
-            builder.append(String.format("%d. %s", (i + 1), ans.get(i).toString()));
-        }
+        IntStream.range(0, ans.size())
+                 .forEach(i -> builder.append(String.format("%d. %s", (i + 1), ans.get(i).toString())));
         Ui.printMessage(builder.toString());
     }
 }
