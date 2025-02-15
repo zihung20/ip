@@ -2,9 +2,11 @@ package lolok;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import lolok.command.Command;
 import lolok.exception.InvalidCommandException;
+import lolok.exception.LolokException;
 import lolok.storage.Storage;
 import lolok.task.TaskList;
 import lolok.ui.Ui;
@@ -28,7 +30,7 @@ public class Lolok {
     }
 
     public String greet(String name) {
-        String greetMessage = "Hello! I'm " + name;
+        String greetMessage = "Hello! I'm " + name + ". ";
         greetMessage += "What can I do for you?";
         return greetMessage;
     }
@@ -71,5 +73,28 @@ public class Lolok {
             ps.flush();
         }
         return response;
+    }
+
+    private void startTest() {
+        boolean isExit = false;
+        Scanner scanner = new Scanner(System.in);
+        while (!isExit) {
+            try {
+                String input = scanner.nextLine();
+                if (input.equals("exit")) {
+                    isExit = true;
+                }
+                String response = getResponse(input);
+                System.out.print(response);
+            } catch (LolokException e) {
+                Ui.printErrorMessage(e.toString());
+            }
+        }
+        this.exit();
+    }
+    public static void main(String[] args) {
+        Lolok l = new Lolok("./data/test.txt");
+        System.out.println(l.greet("Lolok"));
+        l.startTest();
     }
 }

@@ -1,45 +1,37 @@
-________________________________
-Hello! I'm lolok.Lolok
-What can I do for you?
-________________________________
-________________________________
+Reading file from ./data/test.txt...
+Some errors happened...
+We can't read data from the path: .\data\test.txt
+Hello! I'm Lolok. What can I do for you?
+Here are the tasks in your list:
+
 Got it. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in the list.
-________________________________
-________________________________
+
 Got it. I've added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: Feb 15 2025, 14:30)
 Now you have 2 tasks in the list.
-________________________________
-________________________________
+
 Got it. I've added this task:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
+[E][ ] project meeting (from: Feb 15 2025, 14:30 to: Feb 15 2025, 17:30)
 Now you have 3 tasks in the list.
-________________________________
-________________________________
+
 Here are the tasks in your list:
-1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-________________________________
-________________________________
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Feb 15 2025, 14:30)
+3. [E][ ] project meeting (from: Feb 15 2025, 14:30 to: Feb 15 2025, 17:30)
+
 Nice! I've marked this task as done:
 [T][X] borrow book
-________________________________
-________________________________
 Here are the tasks in your list:
-1.[T][X] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-________________________________
-________________________________
+1. [T][X] borrow book
+2. [D][ ] return book (by: Feb 15 2025, 14:30)
+3. [E][ ] project meeting (from: Feb 15 2025, 14:30 to: Feb 15 2025, 17:30)
+
 Noted. I've removed this task:
 [T][X] borrow book
 Now you have 2 tasks in the list.
-________________________________
-________________________________
 Here are the tasks in your list:
-1.[D][ ] return book (by: Sunday)
-2.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-________________________________
+1. [D][ ] return book (by: Feb 15 2025, 14:30)
+2. [E][ ] project meeting (from: Feb 15 2025, 14:30 to: Feb 15 2025, 17:30)
+
