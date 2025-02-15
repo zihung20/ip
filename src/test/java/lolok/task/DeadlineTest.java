@@ -1,14 +1,11 @@
-package lolok;
-
-import lolok.task.Deadline;
-import lolok.task.Task;
-
-import org.junit.jupiter.api.Test;
-
-import java.time.format.DateTimeParseException;
+package lolok.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.format.DateTimeParseException;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
 
