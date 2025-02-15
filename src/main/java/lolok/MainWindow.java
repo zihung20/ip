@@ -31,13 +31,17 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Lolok instance */
     public void setLolok(Lolok l) {
         lolok = l;
     }
-
+    public void greetToUser() {
+        dialogContainer.getChildren().add(
+                DialogBox.getLolokDialog(lolok.greet("Lolok"), lolokImage)
+        );
+    }
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Lolok's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -46,7 +50,7 @@ public class MainWindow extends AnchorPane {
         String response = lolok.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, lolokImage)
+                DialogBox.getLolokDialog(response, lolokImage)
         );
         userInput.clear();
     }

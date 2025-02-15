@@ -23,6 +23,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setLolok(lolok);
             stage.show();
+            fxmlLoader.<MainWindow>getController().greetToUser();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -32,10 +32,11 @@ public enum Action {
         return this == DEADLINE || this == EVENT;
     }
     /**
-     * parse a string type data to Enum type of action
-     * @param type the string representation of the type
-     * @return Action type
-     * @throws InvalidDataException if the string type is not known
+     * Parses a string into the corresponding Enum action type.
+     *
+     * @param type The string representation of the action type.
+     * @return The corresponding Action type.
+     * @throws InvalidDataException If the provided string does not match any known action type.
      */
     public static Action parseData(String type) throws InvalidDataException {
         return switch (type) {

@@ -5,7 +5,6 @@ import java.io.PrintStream;
 
 import lolok.command.Command;
 import lolok.exception.InvalidCommandException;
-import lolok.exception.LolokException;
 import lolok.storage.Storage;
 import lolok.task.TaskList;
 import lolok.ui.Ui;
@@ -14,7 +13,6 @@ import lolok.ui.Ui;
  * main class of the chatbot lolok
  */
 public class Lolok {
-    private final String name = "Lolok";
     private Storage storage;
     private TaskList taskList;
     private final Ui ui;
@@ -26,17 +24,14 @@ public class Lolok {
      */
     public Lolok(String path) {
         readData(path);
-        this.ui = new Ui();
+        ui = new Ui();
     }
 
-    /**
-     * run the program
-     */
-    public void run() {
-        ui.greet(this.name);
-        this.getUserInput();
+    public String greet(String name) {
+        String greetMessage = "Hello! I'm " + name;
+        greetMessage += "What can I do for you?";
+        return greetMessage;
     }
-
     /**
      * Reads data from the specified file.
      *
@@ -50,26 +45,6 @@ public class Lolok {
     private void exit() {
         storage.saveData(taskList.getList(), false);
         Ui.printMessage("Bye. Hope to see you again soon!");
-    }
-
-    private void getUserInput() {
-        boolean exit = false;
-        while (!exit) {
-            try {
-                String input = ui.readCommand();
-                Ui.printLine();
-                Command command = new Command(input.split(" "));
-                command.executeCommand(taskList, ui, storage);
-                exit = command.isExit();
-            } catch (LolokException e) {
-                Ui.printErrorMessage(e.toString());
-            } finally {
-                if (!exit) {
-                    Ui.printLine();
-                }
-            }
-        }
-        this.exit();
     }
 
     public String getResponse(String input) {
@@ -97,12 +72,4 @@ public class Lolok {
         }
         return response;
     }
-
-    /* not use now
-    public static void main(String[] args) {
-        String defaultPath = "./data/lolok_data.txt";
-        Lolok lolok = new Lolok(defaultPath);
-        lolok.run();
-    }
-    */
 }
