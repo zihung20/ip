@@ -13,6 +13,6 @@ public class InvalidCommandException extends LolokException {
 
     @Override
     public String toString() {
-        return "Invalid Command. Don't know what '" + this.type + "' means";
+        return super.toString() + " Invalid Command. Don't know what '" + this.type + "' means";
     }
 }

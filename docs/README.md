@@ -1,30 +1,68 @@
-# Duke User Guide
+# Lolok User Guide
 
-// Update the title above to match the actual product name
+![A sample usage of the chatbot](./Ui.png)
 
-// Product screenshot goes here
+**Lolok** is a chatbot that helps you record your daily tasks and perform basic operations such as adding, marking, and finding tasks. It's lightweight, simple, and easy to use.
 
-// Product intro goes here
+---
 
-## Adding deadlines
+## Features
 
-// Describe the action and its outcome.
+### List Tasks
+- Use the `list` command to display all tasks
 
-// Give examples of usage
+### Adding Tasks
+Lolok supports three types of tasks:
 
-Example: `keyword (optional arguments)`
+#### 1. Todo
+- **Format:** `todo TASK_DESCRIPTION`
+- **Example:** `todo Finish quiz`
 
-// A description of the expected outcome goes here
+#### 2. Deadline
+- **Format:** `deadline TASK_DESCRIPTION /by yyyy-MM-dd, HH:mm`
+- **Example:** `deadline Finish CS2103T quiz /by 2025-02-16, 22:00`
 
+#### 3. Event
+- **Format:** `event TASK_DESCRIPTION /from yyyy-MM-dd, HH:mm /to yyyy-MM-dd, HH:mm`  
+  (Order of `/from` and `/to` does not matter)
+- **Example:** `event CS2103T lecture /from 2025-02-21, 16:00 /to 2025-02-21, 18:00`
+
+**Successful Add Confirmation:**
+
+```plaintext
+Got it. I've added this task:
+[D][ ] Finish CS2103T quiz (by: Feb 16 2025, 22:00)
+Now you have 2 tasks in your list
 ```
-expected output
-```
 
-## Feature ABC
+> [!IMPORTANT]
+> - All commands are case-sensitive (e.g., use `todo` not `Todo`)
+> - You are not allowed to add **_duplicate_** tasks, e.g., tasks with the **same description** and **same date/time** (if applicable).
+> - Date/time must follow strict format: `yyyy-MM-dd, HH:mm` (e.g., `2025-02-21, 16:00`)
 
-// Feature details
+---
 
+### Mark/Unmark Tasks
+- **Format:** `mark TASK_INDEX` or `unmark TASK_INDEX`
+- **Example:** `mark 1` (Marks the first task in the list as done)
 
-## Feature XYZ
+> [!NOTE] 
+> Task indexes correspond to numbers shown in the `list` command output.
 
-// Feature details
+---
+
+### Delete Tasks
+- **Format:** `delete TASK_INDEX`
+- **Example:** `delete 2` (Deletes the second task in the list)
+
+---
+
+### Save and Exit
+- Use `bye` to save tasks and exit
+- **Warning:** Manually closing the window (e.g., clicking X) will NOT save your data
+
+---
+
+### Error Handling
+- Invalid commands or incorrect date formats will trigger error messages
+- Error notifications appear in red dialog boxes

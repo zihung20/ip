@@ -8,27 +8,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lolok.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400" minWidth="300" prefHeight="700" prefWidth="600" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lolok.MainWindow">
+
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="42.0" prefWidth="503.0" promptText="Enter your command here" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="97.0">
-         <font>
-            <Font name="MS UI Gothic" size="20.0" />
-         </font>
-         <padding>
-            <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
-         </padding></TextField>
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="38.0" prefWidth="92.0" text="Send" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="3.0">
-         <font>
-            <Font name="MS UI Gothic" size="17.0" />
-         </font></Button>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" vvalue="1.0" AnchorPane.bottomAnchor="42.39999999999998" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" styleClass="modern-scroll" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0">
             <content>
-                <VBox fx:id="dialogContainer" alignment="TOP_RIGHT" spacing="6.0" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
-                    </padding>
-                </VBox>
+                <VBox fx:id="dialogContainer" spacing="8" styleClass="dialog-vbox" />
             </content>
         </ScrollPane>
+
+        <TextField fx:id="userInput" layoutX="3.2" onAction="#handleUserInput" prefHeight="38.0" prefWidth="526.0" promptText="Type command..." styleClass="modern-input" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="71.0">
+            <font>
+                <Font name="Segoe UI"/>
+            </font>
+            <padding>
+                <Insets />
+            </padding>
+        </TextField>
+
+        <Button fx:id="sendButton" onAction="#handleUserInput" prefHeight="38" prefWidth="64.0" styleClass="modern-button" text="➤" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="2.0">
+            <font>
+                <Font name="Segoe UI Semibold" size="16" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>
