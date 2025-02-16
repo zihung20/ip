@@ -16,19 +16,16 @@ Lolok supports three types of tasks:
 
 #### 1. Todo
 - **Format:** `todo TASK_DESCRIPTION`
-- **Example:**  
-  `todo Finish quiz`
+- **Example:** `todo Finish quiz`
 
 #### 2. Deadline
 - **Format:** `deadline TASK_DESCRIPTION /by yyyy-MM-dd, HH:mm`
-- **Example:**  
-  `deadline Finish CS2103T quiz /by 2025-02-16, 22:00`
+- **Example:** `deadline Finish CS2103T quiz /by 2025-02-16, 22:00`
 
 #### 3. Event
 - **Format:** `event TASK_DESCRIPTION /from yyyy-MM-dd, HH:mm /to yyyy-MM-dd, HH:mm`  
   (Order of `/from` and `/to` does not matter)
-- **Example:**  
-  `event CS2103T lecture /from 2025-02-21, 16:00 /to 2025-02-21, 18:00`
+- **Example:** `event CS2103T lecture /from 2025-02-21, 16:00 /to 2025-02-21, 18:00`
 
 **Successful Add Confirmation:**
 
@@ -38,26 +35,25 @@ Got it. I've added this task:
 Now you have 2 tasks in your list
 ```
 
-> [!Important]
+> [!IMPORTANT]
 > - All commands are case-sensitive (e.g., use `todo` not `Todo`)
+> - You are not allowed to add **_duplicate_** tasks, e.g., tasks with the **same description** and **same date/time** (if applicable).
 > - Date/time must follow strict format: `yyyy-MM-dd, HH:mm` (e.g., `2025-02-21, 16:00`)
 
 ---
 
 ### Mark/Unmark Tasks
 - **Format:** `mark TASK_INDEX` or `unmark TASK_INDEX`
-- **Example:**  
-  `mark 1` (Marks the first task in the list as done)
+- **Example:** `mark 1` (Marks the first task in the list as done)
 
-> [!Note] 
+> [!NOTE] 
 > Task indexes correspond to numbers shown in the `list` command output.
 
 ---
 
 ### Delete Tasks
 - **Format:** `delete TASK_INDEX`
-- **Example:**  
-  `delete 2` (Deletes the second task in the list)
+- **Example:** `delete 2` (Deletes the second task in the list)
 
 ---
 
