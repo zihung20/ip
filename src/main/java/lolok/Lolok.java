@@ -1,11 +1,23 @@
 package lolok;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
+import lolok.command.Command;
+import lolok.exception.InvalidCommandException;
+import lolok.exception.LolokException;
+import lolok.storage.Storage;
+import lolok.task.TaskList;
+import lolok.ui.Ui;
+
+/**
+ * main class of the chatbot lolok
+ */
 public class Lolok {
-    private final String name = "duke.Lolok";
     private Storage storage;
     private TaskList taskList;
-    private Command command;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Creates an instance of the Lolok chatbot that loads and stores data using the given file path.
@@ -14,54 +26,75 @@ public class Lolok {
      */
     public Lolok(String path) {
         readData(path);
-        this.ui = new Ui();
+        ui = new Ui();
     }
 
-    public void run() {
-        ui.greet(this.name);
-        this.getUserInput();
+    public String greet(String name) {
+        String greetMessage = "Hello! I'm " + name + ". ";
+        greetMessage += "What can I do for you?";
+        return greetMessage;
     }
-
     /**
      * Reads data from the specified file.
      *
      * @param path the file path to read data from
      */
     private void readData(String path) {
-        this.storage = new Storage(path);
-        this.taskList = new TaskList(storage.loadData());
+        storage = new Storage(path);
+        taskList = new TaskList(storage.loadData());
     }
 
     private void exit() {
-        this.storage.saveData(taskList.getList(), false);
-        System.out.println("Bye. Hope to see you again soon!");
-        Ui.printLine();
+        storage.saveData(taskList.getList(), false);
+        Ui.printMessage("Bye. Hope to see you again soon!");
     }
 
-    private void getUserInput() {
-        boolean exit = false;
-        while (!exit) {
+    public String getResponse(String input) {
+        //ChatGpt:how to get the response from system.out
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream originalOut = System.out;
+        String response;
+        try {
+            System.setOut(ps);
+
+            Command command = new Command(input.split(" "));
+            command.executeCommand(taskList, ui, storage);
+            boolean exit = command.isExit();
+            if (exit) {
+                this.exit();
+            }
+        } catch (InvalidCommandException e) {
+            Ui.printErrorMessage(e.toString());
+        } finally {
+            response = baos.toString();
+            baos.reset();
+            System.setOut(originalOut);
+            ps.flush();
+        }
+        return response;
+    }
+
+    private void startTest() {
+        boolean isExit = false;
+        Scanner scanner = new Scanner(System.in);
+        while (!isExit) {
             try {
-                String input = ui.readCommand();
-                Ui.printLine();
-                Command command = new Command(input.split(" "));
-                command.executeCommand(taskList, ui, storage);
-                exit = command.isExit();
-            } catch (LolokException e) {
-                // should already handle exception in duke.Command
-                System.out.println(e.toString());
-            } finally {
-                if (!exit) {
-                    Ui.printLine();
+                String input = scanner.nextLine();
+                if (input.equals("exit")) {
+                    isExit = true;
                 }
+                String response = getResponse(input);
+                System.out.print(response);
+            } catch (LolokException e) {
+                Ui.printErrorMessage(e.toString());
             }
         }
         this.exit();
     }
-
     public static void main(String[] args) {
-        String defaultPath = "./data/lolok_data.txt";
-        Lolok lolok = new Lolok(defaultPath);
-        lolok.run();
+        Lolok l = new Lolok("./data/test.txt");
+        System.out.println(l.greet("Lolok"));
+        l.startTest();
     }
 }

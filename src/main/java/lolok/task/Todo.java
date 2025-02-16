@@ -1,9 +1,11 @@
-package lolok;
+package lolok.task;
 
 import java.util.Objects;
 
-
-public class Todo extends Task{
+/**
+ * Represents a Todo class that models a task with no specific deadline.
+ */
+public class Todo extends Task {
     private final String description;
 
     /**
@@ -28,9 +30,6 @@ public class Todo extends Task{
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Todo temp) {
-            return Objects.equals(temp.description, this.description);
-        }
-        return false;
+        return super.equals(obj);
     }
 }

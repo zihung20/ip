@@ -1,9 +1,13 @@
-package lolok;
+package lolok.task;
+
+import java.util.Objects;
 
 /**
  *  Represents a task with common properties and behaviors
  */
-public class Task {
+public abstract class Task {
+    public static final String OUTPUT_DATETIME_FORMAT = "MMM d yyyy, HH:mm";
+    public static final String DATA_DATETIME_FORMAT = "yyyy-MM-dd, HH:mm";
     private final String description;
     private boolean isDone = false;
 
@@ -12,7 +16,7 @@ public class Task {
     }
 
     public boolean matchKeyword(String keyword) {
-        return this.description.contains(keyword);
+        return description.contains(keyword);
     }
 
     public void setDone(boolean isDone) {
@@ -20,7 +24,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " "); // mark done task with X
+        return isDone ? "X" : " "; // mark done task with X
     }
 
     /**
@@ -29,7 +33,7 @@ public class Task {
      * @return a formatted string for storing data
      */
     public String toFormatString() {
-        return this.getStatusIcon() + "|" + this.description;
+        return getStatusIcon() + "|" + description;
     }
 
     /**
@@ -39,6 +43,14 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task temp) {
+            return Objects.equals(temp.description, this.description);
+        }
+        return false;
     }
 }
