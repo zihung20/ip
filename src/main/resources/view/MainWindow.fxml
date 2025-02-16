@@ -19,7 +19,7 @@
 
         <TextField fx:id="userInput" layoutX="3.2" onAction="#handleUserInput" prefHeight="38.0" prefWidth="526.0" promptText="Type command..." styleClass="modern-input" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="71.0">
             <font>
-                <Font name="Segoe UI" size="14" />
+                <Font name="Segoe UI"/>
             </font>
             <padding>
                 <Insets />
