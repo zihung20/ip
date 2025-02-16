@@ -6,3 +6,4 @@ T| |Prepare Q4 Budget
 D| |Complete Budget|2025-01-15, 17:00
 T| |Check Emails
 T| |CS2103T quizz
+D| |Finish CS2103T quiz|2025-02-16, 22:00

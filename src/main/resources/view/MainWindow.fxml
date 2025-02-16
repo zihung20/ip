@@ -26,7 +26,7 @@
             </padding>
         </TextField>
 
-        <Button fx:id="sendButton" prefHeight="38" prefWidth="64.0" styleClass="modern-button" text="➤" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="2.0">
+        <Button fx:id="sendButton" onAction="#handleUserInput" prefHeight="38" prefWidth="64.0" styleClass="modern-button" text="➤" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="2.0">
             <font>
                 <Font name="Segoe UI Semibold" size="16" />
             </font>
