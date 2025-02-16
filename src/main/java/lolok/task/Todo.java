@@ -1,7 +1,5 @@
 package lolok.task;
 
-import java.util.Objects;
-
 /**
  * Represents a Todo class that models a task with no specific deadline.
  */
