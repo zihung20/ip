@@ -1,35 +1,37 @@
-/* Base styles */
-.dialog-box {
-    -fx-padding: 8px 12px;
-    -fx-background-radius: 15px;
-    -fx-font-family: 'Segoe UI';
-    -fx-font-size: 14px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
-}
-
-/* User messages */
 .user-message {
-    -fx-background-color: #007bff;
-    -fx-text-fill: white;
-    -fx-background-radius: 15px 15px 0 15px;
+    -fx-background-color: #212121;
+    -fx-background-radius: 18px 18px 4px 18px;
+    -fx-padding: 12 18 12 18;
 }
 
-/* Bot messages */
+.user-text {
+    -fx-fill: white;
+}
+
 .bot-message {
-    -fx-background-color: #e9ecef;
-    -fx-text-fill: black;
-    -fx-background-radius: 15px 15px 15px 0;
+    -fx-background-color: white;
+    -fx-background-radius: 18px 18px 18px 4px;
+    -fx-padding: 12 18 12 18;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-border-radius: 18px 18px 18px 4px;
 }
 
-/* Error messages */
+.bot-text {
+    -fx-fill: #212121;
+}
+
+.user-text, .bot-text {
+    -fx-font-size: 1.2em;
+}
+
 .error-message {
-    -fx-background-color: #ffe6e6;
-    -fx-border-color: #dc3545;
-    -fx-border-width: 2px;
-    -fx-border-radius: 15px 15px 15px 0;
+    -fx-background-color: #fff0f0;
+    -fx-border-color: #ff4444 !important;
+    -fx-border-width: 1.5 !important;
 }
 
 /* Avatar styling */
 .image-view {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);
 }

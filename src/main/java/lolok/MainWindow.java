@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Lolok lolok;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image lolokImage = new Image(this.getClass().getResourceAsStream("/images/lolok.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image lolokImage = new Image(this.getClass().getResourceAsStream("/images/lolok.jpg"));
 
     @FXML
     public void initialize() {
@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
         String response = lolok.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getLolokDialog(response, lolokImage, response.matches("(?i).*exception.*"))
+                DialogBox.getLolokDialog(response, lolokImage, response.contains("Exception"))
         );
         userInput.clear();
     }

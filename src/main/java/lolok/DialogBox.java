@@ -35,7 +35,7 @@ public class DialogBox extends HBox {
         Text textNode = new Text(text);
         dialog.getChildren().add(textNode);
         displayPicture.setImage(img);
-
+        textNode.getStyleClass().add(isUser ? "user-text" : "bot-text");
         // Style configuration
         this.getStyleClass().add(isUser ? "user-message" : "bot-message");
         HBox.setHgrow(dialog, Priority.ALWAYS);
