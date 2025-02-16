@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = lolok.getResponse(input);
+        String response = lolok.getResponse(input).trim();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getLolokDialog(response, lolokImage, response.contains("Exception"))

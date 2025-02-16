@@ -1,7 +1,8 @@
-E| |project meeting|2025-12-31, 15:30|2025-12-31, 17:30
-E| |team sync|2025-12-31, 09:00|2025-12-31, 10:00
-D| |只因你太美|2025-12-31, 15:30
-T| |sleep well
-T| |study cs2103t concepts
-D| |cs2103t quiz|2025-01-31, 16:00
-T| |call mom
+E| |Kickoff Meeting|2025-12-31, 10:00|2025-12-31, 12:00
+E| |Sprint Sync|2025-12-31, 09:00|2025-12-31, 10:00
+D| |Submit Report|2025-12-31, 18:00
+T| |Review Proposal
+T| |Prepare Q4 Budget
+D| |Complete Budget|2025-01-15, 17:00
+T| |Check Emails
+T| |CS2103T quizz
