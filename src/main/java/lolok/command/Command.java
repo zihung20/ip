@@ -90,7 +90,7 @@ public class Command {
         }
         if (map.size() != numberOfArguments - 1) {
             throw new IncorrectArgumentNumberException("Expected argument keyword numbers: " + numberOfArguments
-                    + "Got: " + map.size() + 1);
+                    + " Got: " + map.size() + 1);
         }
         return map;
     }
