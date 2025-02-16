@@ -11,21 +11,17 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
-/**
- * Represents a dialog box consisting of an ImageView to represent the speaker's face
- * and a label containing text from the speaker.
- */
 public class DialogBox extends HBox {
-    @FXML
-    private TextFlow dialog;
-    @FXML
-    private ImageView displayPicture;
+    @FXML private TextFlow dialog;
+    @FXML private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -34,29 +30,39 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialog.getChildren().add(new Text(text));
+
+        // Set text and image
+        Text textNode = new Text(text);
+        dialog.getChildren().add(textNode);
         displayPicture.setImage(img);
+        textNode.getStyleClass().add(isUser ? "user-text" : "bot-text");
+        // Style configuration
+        this.getStyleClass().add(isUser ? "user-message" : "bot-message");
+        HBox.setHgrow(dialog, Priority.ALWAYS);
+
+        // Circular avatar
+        Circle clip = new Circle(20, 20, 20);
+        displayPicture.setClip(clip);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.getStyleClass().add("reply-label");
         dialog.setTextAlignment(TextAlignment.LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, true);
     }
 
-    public static DialogBox getLolokDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getLolokDialog(String text, Image img, boolean isError) {
+        var db = new DialogBox(text, img, false);
         db.flip();
+        if (isError) {
+            db.getStyleClass().add("error-message");
+        }
         return db;
     }
 }
