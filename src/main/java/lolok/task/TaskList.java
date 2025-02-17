@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import lolok.command.Action;
+import lolok.exception.IncorrectArgumentNumberException;
 import lolok.exception.InvalidDataException;
 import lolok.ui.Ui;
 /**
@@ -39,7 +40,7 @@ public class TaskList {
             }
             Action action = Action.parseData(stringArray[0]);
             if (action.getArgumentCount() + 2 != stringArray.length) {
-                throw new InvalidDataException("Invalid arguments for action: " + taskString);
+                throw new IncorrectArgumentNumberException("Invalid arguments for action: " + taskString);
             }
 
             switch (action) {
@@ -53,7 +54,7 @@ public class TaskList {
                 list.add(new Event(stringArray[2], stringArray[3], stringArray[4]));
                 break;
             default:
-                throw new InvalidDataException("Unsupported action: " + action);
+                throw new InvalidDataException("Unknown action: " + action);
             }
         } catch (InvalidDataException e) {
             Ui.printErrorMessage("Some errors occur while reading data. " + e.getMessage());

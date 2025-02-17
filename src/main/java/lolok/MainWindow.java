@@ -35,6 +35,10 @@ public class MainWindow extends AnchorPane {
     public void setLolok(Lolok l) {
         lolok = l;
     }
+
+    /**
+     * Creates a greeting message for the user when they start the app.
+     */
     public void greetToUser() {
         dialogContainer.getChildren().add(
                 DialogBox.getLolokDialog(lolok.greet("Lolok"), lolokImage, false)
