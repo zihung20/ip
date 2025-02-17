@@ -4,11 +4,15 @@ package lolok.exception;
  * Throws an exception when the command provided by the user is invalid.
  */
 public class InvalidCommandException extends LolokException {
-    private String type;
+    private final String type;
 
-    public InvalidCommandException(String message) {
-        super(message);
-        this.type = message;
+    /**
+     * Creates an exception that indicates the command provided by the user is invalid.
+     * @param commandString the string of the command provided by the user
+     */
+    public InvalidCommandException(String commandString) {
+        super(commandString);
+        type = commandString;
     }
 
     @Override

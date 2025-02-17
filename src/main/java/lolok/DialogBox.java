@@ -1,4 +1,5 @@
 package lolok;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -17,6 +18,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
+/**
+ * A dialog box class that handles the dialog between the user and the chatbot,
+ * including displaying error messages and managing text input/output.
+ */
 public class DialogBox extends HBox {
     @FXML private TextFlow dialog;
     @FXML private ImageView displayPicture;

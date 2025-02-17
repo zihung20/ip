@@ -1,6 +1,9 @@
 package lolok.exception;
 
-public class InvalidKeywordException extends RuntimeException {
+/**
+ * Throws an exception if the keyword provided by the user is invalid.
+ */
+public class InvalidKeywordException extends LolokException {
     public InvalidKeywordException(String message) {
         super(message);
     }

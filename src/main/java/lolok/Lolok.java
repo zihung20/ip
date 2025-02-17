@@ -29,6 +29,12 @@ public class Lolok {
         ui = new Ui();
     }
 
+    /**
+     * Greets the user.
+     *
+     * @param name The name of the chatbot, e.g., "lolok" for this case.
+     * @return The string representation of the greeting message.
+     */
     public String greet(String name) {
         String greetMessage = "Hello! I'm " + name + ". ";
         greetMessage += "What can I do for you?";
@@ -91,10 +97,5 @@ public class Lolok {
             }
         }
         this.exit();
-    }
-    public static void main(String[] args) {
-        Lolok l = new Lolok("./data/test.txt");
-        System.out.println(l.greet("Lolok"));
-        l.startTest();
     }
 }
