@@ -63,7 +63,7 @@ public class Lolok {
 
         try {
             Command command = new Command(input.split(" "));
-            command.executeCommand(taskList, ui, storage);
+            command.executeCommand(taskList);
             if (command.isExit()) {
                 this.exit();
             }

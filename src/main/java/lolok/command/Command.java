@@ -5,7 +5,6 @@ import java.util.Map;
 
 import lolok.exception.IncorrectArgumentNumberException;
 import lolok.exception.InvalidCommandException;
-import lolok.storage.Storage;
 import lolok.task.Deadline;
 import lolok.task.Event;
 import lolok.task.TaskList;
@@ -118,10 +117,8 @@ public class Command {
      * Executes the command accordingly, using the environment passed as parameters.
      *
      * @param taskList the TaskList instance to process the command
-     * @param ui the UI instance to handle user interactions
-     * @param storage the Storage instance to manage data persistence
      */
-    public void executeCommand(TaskList taskList, Ui ui, Storage storage) {
+    public void executeCommand(TaskList taskList) {
         switch (type) {
         case BYE:
             isExit = true;
@@ -154,9 +151,7 @@ public class Command {
             //should not have invalid command
             default -> throw new InvalidCommandException(blocks[0]);
             }
-        } catch (InvalidCommandException e) {
-            Ui.printMessage(e.toString());
-        } catch (IncorrectArgumentNumberException e) {
+        } catch (InvalidCommandException | IncorrectArgumentNumberException e) {
             Ui.printMessage(e.toString());
         }
     }
