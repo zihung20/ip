@@ -22,7 +22,7 @@ public class Lolok {
     /**
      * Creates an instance of the Lolok chatbot that loads and stores data using the given file path.
      *
-     * @param path the file path where data is stored; the file must exist
+     * @param path the file path where data is stored
      */
     public Lolok(String path) {
         readData(path);
@@ -56,28 +56,49 @@ public class Lolok {
     }
 
     public String getResponse(String input) {
-        //ChatGpt:how to get the response from system.out
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream ps = redirectSystemOutput(byteArrayOutputStream);
         PrintStream originalOut = System.out;
         String response;
-        try {
-            System.setOut(ps);
 
+        try {
             Command command = new Command(input.split(" "));
             command.executeCommand(taskList, ui, storage);
-            boolean exit = command.isExit();
-            if (exit) {
+            if (command.isExit()) {
                 this.exit();
             }
         } catch (InvalidCommandException e) {
             Ui.printErrorMessage(e.toString());
         } finally {
-            response = baos.toString();
-            baos.reset();
-            System.setOut(originalOut);
-            ps.flush();
+            response = resetSystemOutput(ps, originalOut, byteArrayOutputStream);
         }
+
+        return response;
+    }
+
+    /**
+     * Redirects the system output to a PrintStream that captures the output to a ByteArrayOutputStream.
+     * @param byteArrayOutputStream the ByteArrayOutputStream to capture the output.
+     * @return the PrintStream that captures the system output.
+     */
+    private PrintStream redirectSystemOutput(ByteArrayOutputStream byteArrayOutputStream) {
+        PrintStream ps = new PrintStream(byteArrayOutputStream);
+        System.setOut(ps);
+        return ps;
+    }
+
+    /**
+     * Resets the system output to the original PrintStream and retrieves the captured output.
+     * @param printStream the PrintStream that was used for redirecting output.
+     * @param originalOut the original system output (usually System.out).
+     * @param baos the ByteArrayOutputStream that captured the output.
+     * @return the captured output as a string.
+     */
+    private String resetSystemOutput(PrintStream printStream, PrintStream originalOut, ByteArrayOutputStream baos) {
+        printStream.flush();
+        String response = baos.toString();
+        baos.reset();
+        System.setOut(originalOut);
         return response;
     }
 

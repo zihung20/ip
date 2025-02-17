@@ -3,6 +3,7 @@ package lolok.storage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -31,8 +32,16 @@ public class Storage {
      */
     public List<String> loadData() {
         try {
+            Path path = Paths.get(filePath);
+            if (!Files.exists(path.getParent())) {
+                Files.createDirectories(path.getParent());
+            }
+            if (!Files.exists(path)) {
+                Files.createFile(path);
+                Ui.printMessage("File not found, creating new file at " + filePath);
+            }
             Ui.printMessage("Reading file from " + filePath + "...");
-            return Files.readAllLines(Paths.get(filePath));
+            return Files.readAllLines(path);
         } catch (IOException e) {
             Ui.printErrorMessage("We can't read data from the path: " + e.getMessage());
             return List.of();

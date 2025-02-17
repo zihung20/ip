@@ -14,22 +14,24 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private final Lolok lolok = new Lolok("./data/lolok_data.txt");
+    private final FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
 
     @Override
     public void start(Stage stage) {
+        initialize(stage);
+        fxmlLoader.<MainWindow>getController().setLolok(lolok);
+        stage.show();
+        fxmlLoader.<MainWindow>getController().greetToUser();
+    }
+    private void initialize(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            //set up the title and icon
             stage.setTitle("Chatbot Lolok");
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/icon.png")));
-            fxmlLoader.<MainWindow>getController().setLolok(lolok);
-            stage.show();
-            fxmlLoader.<MainWindow>getController().greetToUser();
         } catch (IOException e) {
-            e.printStackTrace();
+            fxmlLoader.<MainWindow>getController().printInitializeMessage(e.getMessage());
         }
     }
 }

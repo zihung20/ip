@@ -37,6 +37,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Prints an initializing message when starting the app, such as loading app data.
+     *
+     * @param message The message to be printed.
+     */
+    public void printInitializeMessage(String message) {
+        dialogContainer.getChildren().add(
+                DialogBox.getLolokDialog(message, lolokImage, false)
+        );
+    }
+    /**
      * Creates a greeting message for the user when they start the app.
      */
     public void greetToUser() {
