@@ -4,16 +4,15 @@ package lolok.task;
  * Represents a Todo class that models a task with no specific deadline.
  */
 public class Todo extends Task {
-    private final String description;
 
     /**
      * Constructs a Todo instance, which is a subclass of Task
      *
      * @param description the description of the todo task
+     * @throws IllegalArgumentException if description is null or empty
      */
     public Todo(String description) {
         super(description);
-        this.description = description;
     }
 
     @Override
@@ -28,6 +27,12 @@ public class Todo extends Task {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Todo)) {
+            return false;
+        }
         return super.equals(obj);
     }
 }

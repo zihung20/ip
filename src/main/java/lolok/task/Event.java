@@ -2,6 +2,7 @@ package lolok.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 /**
@@ -17,12 +18,31 @@ public class Event extends Task {
      * @param description the description of the event
      * @param from the start time of the event, formatted as "yyyy-MM-dd, HH:mm"
      * @param to the end time of the event, formatted as "yyyy-MM-dd, HH:mm"
+     * @throws IllegalArgumentException if description, from, or to is null or empty
+     * @throws DateTimeParseException if the date format is invalid
+     * @throws IllegalArgumentException if the end time is before the start time
      */
     public Event(String description, String from, String to) {
         super(description);
-        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(DATA_DATETIME_FORMAT);
-        this.from = LocalDateTime.parse(from, parseFormat);
-        this.to = LocalDateTime.parse(to, parseFormat);
+        if (from == null || from.trim().isEmpty()) {
+            throw new IllegalArgumentException("Event start time cannot be null or empty");
+        }
+        if (to == null || to.trim().isEmpty()) {
+            throw new IllegalArgumentException("Event end time cannot be null or empty");
+        }
+
+        try {
+            DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(DATA_DATETIME_FORMAT);
+            this.from = LocalDateTime.parse(from, parseFormat);
+            this.to = LocalDateTime.parse(to, parseFormat);
+
+            if (this.to.isBefore(this.from)) {
+                throw new IllegalArgumentException("Event end time cannot be before start time");
+            }
+        } catch (DateTimeParseException e) {
+            throw new DateTimeParseException("Invalid date format. Expected format: "
+                    + DATA_DATETIME_FORMAT, e.getParsedString(), e.getErrorIndex());
+        }
     }
 
     @Override

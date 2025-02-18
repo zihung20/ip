@@ -11,12 +11,30 @@ public abstract class Task {
     private final String description;
     private boolean isDone = false;
 
+    /**
+     * Constructs a task with the given description.
+     *
+     * @param description the description of the task
+     * @throws IllegalArgumentException if description is null or empty
+     */
     public Task(String description) {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Task description cannot be null or empty");
+        }
         this.description = description;
     }
 
+    /**
+     * Checks if the task description contains the specified keyword.
+     *
+     * @param keyword the keyword to search for
+     * @return true if the description contains the keyword, false otherwise
+     */
     public boolean matchKeyword(String keyword) {
-        return description.contains(keyword);
+        if (keyword == null) {
+            return false;
+        }
+        return description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     public void setDone(boolean isDone) {
@@ -27,6 +45,14 @@ public abstract class Task {
         return isDone ? "X" : " "; // mark done task with X
     }
 
+    /**
+     * Gets the description of the task.
+     *
+     * @return the task description
+     */
+    public String getDescription() {
+        return description;
+    }
     /**
      * Returns a formatted string that follows a standard format, e.g., "x|x|...".
      *

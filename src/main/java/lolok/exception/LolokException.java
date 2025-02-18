@@ -16,6 +16,6 @@ public class LolokException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "LolokException: ";
+        return "LolokException: " + getMessage();
     }
 }
