@@ -10,7 +10,7 @@
 
 ### List Tasks
 - Use the `list` command to display all tasks
-
+---
 ### Adding Tasks
 Lolok supports three types of tasks:
 
@@ -51,6 +51,11 @@ Now you have 2 tasks in your list
 
 ---
 
+### Find Task
+- **Format:** `find TASK_KEYWORD`
+- **Example:** `find meeting` (Finds the tasks that has description `meeting`)
+
+---
 ### Delete Tasks
 - **Format:** `delete TASK_INDEX`
 - **Example:** `delete 2` (Deletes the second task in the list)
