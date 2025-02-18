@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import lolok.exception.InvalidCommandException;
 
-
-
 public class CommandTest {
     @Test
     public void testEmptyCommand() {

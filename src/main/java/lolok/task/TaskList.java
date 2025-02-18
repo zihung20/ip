@@ -40,22 +40,16 @@ public class TaskList {
             }
             Action action = Action.parseData(stringArray[0]);
             if (action.getArgumentCount() + 2 != stringArray.length) {
-                throw new IncorrectArgumentNumberException("Invalid arguments for action: " + taskString);
+                throw new IncorrectArgumentNumberException("Incorrect argument numbers for action: " + taskString);
             }
-
-            switch (action) {
-            case TODO:
-                list.add(new Todo(stringArray[2]));
-                break;
-            case DEADLINE:
-                list.add(new Deadline(stringArray[2], stringArray[3]));
-                break;
-            case EVENT:
-                list.add(new Event(stringArray[2], stringArray[3], stringArray[4]));
-                break;
-            default:
-                throw new InvalidDataException("Unknown action: " + action);
-            }
+            Task addTask = switch (action) {
+            case TODO -> new Todo(stringArray[2]);
+            case DEADLINE -> new Deadline(stringArray[2], stringArray[3]);
+            case EVENT -> new Event(stringArray[2], stringArray[3], stringArray[4]);
+            default -> throw new InvalidDataException("Unknown action: " + action);
+            };
+            list.add(addTask);
+            addTask.setDone(stringArray[1].equals("X"));
         } catch (InvalidDataException e) {
             Ui.printErrorMessage("Some errors occur while reading data. " + e.getMessage());
         } catch (IllegalArgumentException | DateTimeParseException e) {
@@ -105,7 +99,7 @@ public class TaskList {
             String taskAmount = String.format("Now you have %d tasks in the list.", list.size());
             Ui.printMessage(message + task.toString() + "\n" + taskAmount);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printErrorMessage("Index" + (index + 1) + "is invalid or doesn't have any task.");
+            Ui.printErrorMessage("Index " + (index + 1) + " is invalid or doesn't have any task.");
         }
     }
 

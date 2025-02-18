@@ -24,8 +24,17 @@ public abstract class Task {
         this.description = description;
     }
 
+    /**
+     * Checks if the task description contains the specified keyword.
+     *
+     * @param keyword the keyword to search for
+     * @return true if the description contains the keyword, false otherwise
+     */
     public boolean matchKeyword(String keyword) {
-        return description.contains(keyword);
+        if (keyword == null) {
+            return false;
+        }
+        return description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     public void setDone(boolean isDone) {
@@ -36,6 +45,14 @@ public abstract class Task {
         return isDone ? "X" : " "; // mark done task with X
     }
 
+    /**
+     * Gets the description of the task.
+     *
+     * @return the task description
+     */
+    public String getDescription() {
+        return description;
+    }
     /**
      * Returns a formatted string that follows a standard format, e.g., "x|x|...".
      *
