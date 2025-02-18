@@ -1,6 +1,7 @@
 //code refined by claude
 package lolok.command;
 
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -235,7 +236,8 @@ public class Command {
             case FIND -> taskList.searchTask(arg[0]);
             default -> throw new InvalidCommandException("Invalid Command. Don't know what '" + blocks[0] + "' means");
             }
-        } catch (InvalidCommandException | IncorrectArgumentNumberException e) {
+        } catch (InvalidCommandException | IncorrectArgumentNumberException | DateTimeParseException
+                 | IllegalArgumentException e) {
             Ui.printErrorMessage(e.toString());
         }
     }

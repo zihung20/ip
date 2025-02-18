@@ -58,8 +58,8 @@ public class TaskList {
             }
         } catch (InvalidDataException e) {
             Ui.printErrorMessage("Some errors occur while reading data. " + e.getMessage());
-        } catch (DateTimeParseException e) {
-            Ui.printErrorMessage("The date format of the data cannot be parsed. " + e.getMessage());
+        } catch (IllegalArgumentException | DateTimeParseException e) {
+            Ui.printErrorMessage(e.toString());
         }
     }
 

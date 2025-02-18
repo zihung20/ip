@@ -11,7 +11,16 @@ public abstract class Task {
     private final String description;
     private boolean isDone = false;
 
+    /**
+     * Constructs a task with the given description.
+     *
+     * @param description the description of the task
+     * @throws IllegalArgumentException if description is null or empty
+     */
     public Task(String description) {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Task description cannot be null or empty");
+        }
         this.description = description;
     }
 
