@@ -129,7 +129,7 @@ public class TaskList {
         List<Task> ans = list.stream().filter(task -> task.matchKeyword(keyword)).toList();
         StringBuilder builder = new StringBuilder("Here are the matching tasks in your list:\n");
         IntStream.range(0, ans.size())
-                 .forEach(i -> builder.append(String.format("%d. %s", (i + 1), ans.get(i).toString())));
+                 .forEach(i -> builder.append(String.format("%d. %s \n", (i + 1), ans.get(i).toString())));
         Ui.printMessage(builder.toString());
     }
 }
