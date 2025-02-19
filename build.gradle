@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClass.set("lolok.Launcher")
+    mainClass.set("loklok.Launcher")
 }
 
 shadowJar {
-    archiveBaseName = "lolok"
+    archiveBaseName = "loklok"
     archiveClassifier = null
 }
 
