@@ -35,8 +35,10 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setTextAndImage(text, img, isUser);
+    }
 
-        // Set text and image
+    private void setTextAndImage(String text, Image img, boolean isUser) {
         Text textNode = new Text(text);
         dialog.getChildren().add(textNode);
         displayPicture.setImage(img);
