@@ -1,8 +1,8 @@
-# Lolok User Guide
+# LokLok User Guide
 
 ![A sample usage of the chatbot](./Ui.png)
 
-**Lolok** is a chatbot that helps you record your daily tasks and perform basic operations such as adding, marking, and finding tasks. It's lightweight, simple, and easy to use.
+**LokLok** is a chatbot that helps you record your daily tasks and perform basic operations such as adding, marking, and finding tasks. It's lightweight, simple, and easy to use.
 
 ---
 
@@ -12,7 +12,7 @@
 - Use the `list` command to display all tasks
 ---
 ### Adding Tasks
-Lolok supports three types of tasks:
+LokLok supports three types of tasks:
 
 #### 1. Todo
 - **Format:** `todo TASK_DESCRIPTION`
