@@ -64,7 +64,14 @@ Now you have 2 tasks in your list
 
 ### Save and Exit
 - Use `bye` to save tasks and exit
-- **Warning:** Manually closing the window (e.g., clicking X) will NOT save your data
+>[!WARNING] 
+> Manually closing the window (e.g., clicking X) will NOT save your data
+
+---
+
+### Secret Personality
+- Activate: `hmmm`
+- Deactivate: `unHmmm`
 
 ---
 

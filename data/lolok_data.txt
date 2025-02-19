@@ -1,8 +1,8 @@
 E| |Kickoff Meeting|2025-12-31, 10:00|2025-12-31, 12:00
 E| |Sprint Sync|2025-12-31, 09:00|2025-12-31, 10:00
 D| |Submit Report|2025-12-31, 18:00
-T| |Review Proposal
-T| |Prepare Q4 Budget
+T| |Review Emerald
+T| |Prepare village emerald budget
 D| |Complete Budget|2025-01-15, 17:00
 T|X|Check Emails
 T| |CS2103T quizz

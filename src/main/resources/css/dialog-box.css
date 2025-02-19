@@ -32,8 +32,3 @@
     -fx-border-color: #ff4444 !important;
     -fx-border-width: 1.5 !important;
 }
-
-/* Avatar styling */
-.image-view {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);
-}
